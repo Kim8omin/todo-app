@@ -9,9 +9,9 @@ const Header = () => {
         </Title>
         <MenuLayer>
             <span>Home</span>
-            <span>ADD Task</span>
-            <span>Recect Todo</span>
-            <span>MY Todo</span>
+            <span>Add Task</span>
+            <span>My Todo</span>
+            <span>Today I Learn</span>
         </MenuLayer>
         </HeaderLayer>
     );
@@ -40,13 +40,21 @@ font-weight: 700;
 height: 39px;
 letter-spacing: 3px;
 line-height: normal;
+margin-left: 80px;
 `
 
 const MenuLayer=styled.div`
 display:flex;
 gap: 30px;
+margin-right: 80px;
 font-size:19px;
 color: #f2e3d9;
 letter-spacing: 0.5px;
 cursor: pointer;
+
+span {
+    &:hover {
+        font-weight: bold;
+    }
+}
 `

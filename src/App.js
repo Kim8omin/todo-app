@@ -2,6 +2,8 @@ import Header from './components/header';
 import Banner from './components/banner';
 import AddTask from './components/addTask';
 import Todo from './components/todo'
+import ToDoList from './components/toDoList';
+import Footer from './components/footer';
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
    <Banner/>
    <AddTask/>
    <Todo/>
+   <Footer/>
    </>
   );
 }
