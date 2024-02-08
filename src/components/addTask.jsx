@@ -3,7 +3,7 @@ import styled from "styled-components";
 import ToDoList from "./toDoList";
 import { useState, useEffect } from "react";
 
-const AddTask = () => {
+const AddTask = (props) => {
   const [todo, setTodo] = useState(
    [{
       title: "",
@@ -14,17 +14,17 @@ const AddTask = () => {
     }],
 );
 
-
-  const handleChange = (event) => {
-    const { name, value, files } = event.target;
-    setTodo([{
-        ...todo[0],[name]: name === "file" ? files : value,
-    }])
-    console.log(todo);
+   const handleChange = (event) => {
+    const { name, value} = event.target;
+    setTodo((todo)=>{
+      return {...todo,[name]:value}
+    })
+    console.log("handleChange 실행", todo );
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    props.onAdd(todo)
     setTodo({
       title: "",
       date: "",
@@ -32,7 +32,7 @@ const AddTask = () => {
       todo: "",
       file: [],
     });
-    console.log("handleSubmit실행완료", todo);
+    console.log("handleSubmit 실행", todo);
   };
 
   return (
@@ -73,12 +73,11 @@ const AddTask = () => {
               onChange={handleChange}
               style={{ height: "90px", fontFamily: "inherit" }}
             />
-            <input type="file" name="file" onChange={handleChange} />
+            <input type="file" name="file" onChange={handleChange} value={todo.file}/>
             <button type="submit">SUBMIT</button>
           </form>
         </FormLayer>
       </TaskWrapper>
-      <ToDoList todo={todo} />
     </>
   );
 };

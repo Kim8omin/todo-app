@@ -1,34 +1,50 @@
 import React from "react";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import AddTask from "./addTask";
 
 
-const ToDoList = ({todo}) => {
+const ToDoList = () => {
+  const [list , setList ] = useState([{
+      title: "Reading a tech article",
+      date: "Feb 8th 2024",
+      category: "Reading",
+      todo: "Reading about the react 2024 articles ",
+      file: [],
+  }])
  
   
+const onAddItem = (item) =>{
+    const newItem = {...item, id:10}
+    setList((list)=>[...list, newItem])
+}
+
   return (
+    <>
+    <AddTask onAdd={onAddItem}/>
     <CardLayer>
         <h2>MY TODO</h2>
         <hr/>
         <CardList>
       <div>
-        {todo && 
-            todo.map((list) => {
+        {list && 
+            list.map((l) => {
           return (
-            <li key={list.title}>
-              <div>{list.file}</div>
+            <div key={l.title}>
+              <div>{l.file}</div>
               <div>
-                <h3>{list.title}</h3>
-                <p>{list.date}</p>
-                <p>{list.category}</p>
-                <p>{list.todo}</p>
+                <h3>{l.title}</h3>
+                <p>{l.date}</p>
+                <p>{l.category}</p>
+                <p>{l.todo}</p>
               </div>
-          </li>
+          </div>
           );
         })}
       </div>
       </CardList>
     </CardLayer>
+    </>
   );
 };
 

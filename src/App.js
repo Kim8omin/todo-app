@@ -1,6 +1,5 @@
 import Header from './components/header';
 import Banner from './components/banner';
-import AddTask from './components/addTask';
 import Todo from './components/todo'
 import ToDoList from './components/toDoList';
 import Footer from './components/footer';
@@ -10,7 +9,7 @@ function App() {
    <>
    <Header/>
    <Banner/>
-   <AddTask/>
+   <ToDoList/>
    <Todo/>
    <Footer/>
    </>
