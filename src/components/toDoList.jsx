@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
 import AddTask from "./addTask";
+import { Link } from "react-router-dom";
 
 const ToDoList = () => {
   const [list, setList] = useState([
@@ -34,17 +35,25 @@ const ToDoList = () => {
                 return (
                   <div key={l.title}>
                     <TaskCard>
+                      <StyledLink to={`/todo/${l.title}`}>
                       <h3>{l.title}</h3>
                       <p>{l.date}</p>
                       <div>{l.file}</div>
                       <p>{l.category}</p>
                       <p>{l.todo}</p>
+                      <p style={{marginTop:'150px'}}>Read More</p>
+                      </StyledLink>
                     </TaskCard>
                   </div>
                 );
               })}
             <AddButton>
-              <h2>add</h2>
+              <h2 onClick={() => {
+              window.scrollTo({
+                top: 550,
+                behavior: "smooth",
+              });
+            }}>add</h2>
             </AddButton>
           </EachCard>
         </CardList>
@@ -72,6 +81,7 @@ const CardList = styled.div`
 
 const EachCard = styled.div`
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: center;
   align-item: center;
@@ -88,6 +98,19 @@ const TaskCard = styled.div`
   width: 250px;
   height: 400px;
 `;
+
+const StyledLink = styled(Link)`
+  text-decoration: none; 
+  color: black; 
+
+  &:hover {
+    color: grey; 
+  }
+`;
+
+
+
+
 
 const AddButton = styled.div`
   display: flex;

@@ -1,19 +1,19 @@
-import Header from "./components/header";
-import Banner from "./components/banner";
-import Todo from "./components/todo";
-import ToDoList from "./components/toDoList";
-import Footer from "./components/footer";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Main from './pages/main'
+import TodoDetail from './components/todoDetail';
+
 
 function App() {
   return (
-    <>
-      <Header />
-      <Banner />
-      <ToDoList />
-      <Todo />
-      <Footer />
-    </>
+    <Router>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="todo/:title" element={<TodoDetail />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
+
