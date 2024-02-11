@@ -8,9 +8,10 @@ const AddTask = (props) => {
    [{
       title: "",
       date: "",
+      file: [],
       category: "",
       todo: "",
-      file: [],
+     
     }],
 );
 
@@ -28,9 +29,9 @@ const AddTask = (props) => {
     setTodo({
       title: "",
       date: "",
+      file: [],
       category: "",
       todo: "",
-      file: [],
     });
     console.log("handleSubmit 실행", todo);
   };

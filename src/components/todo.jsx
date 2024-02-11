@@ -5,6 +5,7 @@ import sunflower from '../assets/sunflower.jpg'
 
 function Todo() {
     return (
+        <div id="myTodaySection">
         <ToDoLayer>
             <TextLayer>
                 <h2>Today I Learn</h2> 
@@ -14,6 +15,7 @@ Edit your About page from the Pages tab by clicking the edit button.</p>
             </TextLayer>
             <Img src={sunflower} alt='sunflower'/>
         </ToDoLayer>
+        </div>
     );
 }
 
