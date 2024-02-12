@@ -2,11 +2,11 @@ import React from "react";
 import ball from "../assets/ball.png";
 import styled from "styled-components";
 
-const Banner = () => {
+const Banner = ({testRef}) => {
   return (
-    <BannerWrapper>
-      <img src={ball} alt="ball" />
-      <BannerText>Just Do it ! </BannerText>
+    <BannerWrapper id="mainSection">
+      <img src={ball} alt="ball" ref={testRef}/>
+      <BannerText >Just Do it ! </BannerText>
     </BannerWrapper>
   );
 };

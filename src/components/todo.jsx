@@ -3,12 +3,13 @@ import styled from 'styled-components';
 import sunflower from '../assets/sunflower.jpg'
 
 
-function Todo() {
+function Todo({list}) {
+    console.log(list)
     return (
         <div id="myTodaySection">
         <ToDoLayer>
             <TextLayer>
-                <h2>Today I Learn</h2> 
+                <h2>{list?.[0]?.title}</h2> 
                 <hr />
                 <p>The About page is the core description of your website. Here is where you let clients know what your website is about. You can edit all of this text and replace it with what you want to write. For example you can let them know how long you have been in business, what makes your company special, what are its core values and more.
 Edit your About page from the Pages tab by clicking the edit button.</p>

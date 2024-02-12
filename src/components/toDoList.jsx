@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useState } from "react";
 import AddTask from "./addTask";
 import { Link } from "react-router-dom";
+import Todo from "./todo";
 
 const ToDoList = () => {
   const [list, setList] = useState([
@@ -17,15 +18,15 @@ const ToDoList = () => {
 
   const onAddItem = (item) => {
     const newItem = { ...item, id: 10 };
-    setList((list) => [...list, newItem]);
+    setList((list) => [newItem, ...list]);
   };
 
   return (
     <>
     
       <AddTask onAdd={onAddItem} />
-      <div id="myTodoSection">
-      <CardLayer>
+      
+      <CardLayer id="myTodoSection">
         <h2>MY TODO</h2>
         <hr />
         <CardList>
@@ -58,8 +59,11 @@ const ToDoList = () => {
           </EachCard>
         </CardList>
       </CardLayer>
-    </div>
-    </>
+      <Todo list={list}
+      />
+      </>
+   
+   
   );
 };
 

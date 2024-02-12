@@ -38,7 +38,7 @@ const AddTask = (props) => {
 
   return (
     <>
-      <TaskWrapper>
+      <TaskWrapper id="addTodoSection" >
         <TitleLayer>
           <h2>ADD TASK</h2>
           <hr></hr>
