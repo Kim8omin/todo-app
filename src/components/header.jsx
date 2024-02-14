@@ -7,97 +7,95 @@ import ToDoList from "./toDoList";
 import Todo from "./todo";
 import Footer from "./footer";
 
-const Header = ({onClickRef}) => {
-  const clickHeaderButton = (id,offset=80)=>{
-    const section= document.getElementById(id)
+const Header = ({ onClickRef }) => {
+  const clickHeaderButton = (id, offset = 80) => {
+    const section = document.getElementById(id);
 
-    if (section){
-      const sectionPosition=section.offsetTop;
+    if (section) {
+      const sectionPosition = section.offsetTop;
       window.scrollTo({
-        top: sectionPosition-offset,
+        top: sectionPosition - offset,
         behavior: "smooth",
       });
-    console.log(sectionPosition)
-    
-  }}
-  
+      console.log(sectionPosition);
+    }
+  };
+
   return (
     <>
       <HeaderLayer>
         <Title>My task</Title>
         <MenuLayer>
           <span
-          onClick={() => {
-            onClickRef('banner')
+            onClick={() => {
+              // onClickRef("banner");
 
-          //   clickHeaderButton('mainSection',99)
-            // const mainSection= document.getElementById("mainSection")
+              clickHeaderButton("mainSection", 99);
+              // const mainSection= document.getElementById("mainSection")
 
-            // if (mainSection){
-            //   const mainPosition=mainSection.offsetTop;
-            //   window.scrollTo({
-            //     top: mainPosition-99,
-            //     behavior: "smooth",
-            //   });
-            // console.log(mainPosition)
-            
-          //   }}
-          }}
-          // onClick={()=>{
-          //   clickButton('banner');
-          // }}
-          
+              // if (mainSection){
+              //   const mainPosition=mainSection.offsetTop;
+              //   window.scrollTo({
+              //     top: mainPosition-99,
+              //     behavior: "smooth",
+              //   });
+              // console.log(mainPosition)
+
+              //   }}
+            }}
+            // onClick={()=>{
+            //   clickButton('banner');
+            // }}
           >
-          Home
+            Home
           </span>
           <span
-          onClick={() => {
-          //   const addSection = document.getElementById("addTodoSection");
+            onClick={() => {
+              //   const addSection = document.getElementById("addTodoSection");
 
-          //   if (addSection) {
-          //     const targetPosition = addSection.offsetTop;
+              //   if (addSection) {
+              //     const targetPosition = addSection.offsetTop;
 
-          //     window.scrollTo({
-          //       top: targetPosition-80,
-          //       behavior: "smooth",
-          //     });
-          //   }
-          // }}
-          // onClick={()=>{
-          //   clickButton('addTodo');
-          // }}
-          clickHeaderButton('addTodoSection')
-        
-        }}
-          
-          
-          
-          
-          >  Add Task
+              //     window.scrollTo({
+              //       top: targetPosition-80,
+              //       behavior: "smooth",
+              //     });
+              //   }
+              // }}
+              // onClick={()=>{
+              //   clickButton('addTodo');
+              // }}
+              clickHeaderButton("addTodoSection");
+            }}
+          >
+            Add Task
           </span>
           <span
-           onClick={() => {
-            const todoSection = document.getElementById("myTodoSection");
+            onClick={() => {
+              clickHeaderButton("myTodoSection");
+              //   const todoSection = document.getElementById("myTodoSection");
 
-            if (todoSection) {
-              const targetPosition = todoSection.offsetTop;
+              //   if (todoSection) {
+              //     const targetPosition = todoSection.offsetTop;
 
-              window.scrollTo({
-                top: targetPosition-80,
-                behavior: "smooth",
-              });
-            console.log(targetPosition)
-            
-            }
-          }}
-        >
-        My Todo</span>
-          <span
-          onClick={()=>{
-            clickHeaderButton('myTodaySection')
-          }}
+              //     window.scrollTo({
+              //       top: targetPosition - 80,
+              //       behavior: "smooth",
+              //     });
+              //     console.log(targetPosition);
+              //   }
+              // }}
+            }}
           >
-            Today I Learn</span>
+            My Todo
+          </span>
+          <span
+            onClick={() => {
+              clickHeaderButton("myTodaySection");
+            }}
+          >
+            Today I Learn
+          </span>
         </MenuLayer>
       </HeaderLayer>
     </>

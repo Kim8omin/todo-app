@@ -4,32 +4,42 @@ import ToDoList from "./toDoList";
 import { useState, useEffect } from "react";
 
 const AddTask = (props) => {
-  const [todo, setTodo] = useState(
-   [{
+  const [todo, setTodo] = useState([
+    {
       title: "",
       date: "",
-      file: [],
+      file: "",
       category: "",
       todo: "",
-     
-    }],
-);
+    },
+  ]);
 
-   const handleChange = (event) => {
-    const { name, value} = event.target;
-    setTodo((todo)=>{
-      return {...todo,[name]:value}
-    })
-    console.log("handleChange 실행", todo );
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "file") {
+      const files = event.target.files;
+      const fileUrl = Array.from(files).map((file) =>
+        URL.createObjectURL(file)
+      );
+
+      setTodo((todo) => ({ ...todo, [name]: fileUrl }));
+    } else {
+      setTodo((todo) => {
+        return { ...todo, [name]: value };
+      });
+    }
+
+    console.log("handleChange 실행", todo);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onAdd(todo)
+    props.onAdd(todo);
     setTodo({
       title: "",
       date: "",
-      file: [],
+      file: "",
       category: "",
       todo: "",
     });
@@ -38,7 +48,7 @@ const AddTask = (props) => {
 
   return (
     <>
-      <TaskWrapper id="addTodoSection" >
+      <TaskWrapper id="addTodoSection">
         <TitleLayer>
           <h2>ADD TASK</h2>
           <hr></hr>
@@ -74,7 +84,7 @@ const AddTask = (props) => {
               onChange={handleChange}
               style={{ height: "90px", fontFamily: "inherit" }}
             />
-            <input type="file" name="file" onChange={handleChange} value={todo.file}/>
+            <input type="file" name="file" onChange={handleChange} />
             <button type="submit">SUBMIT</button>
           </form>
         </FormLayer>

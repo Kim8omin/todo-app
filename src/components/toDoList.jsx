@@ -10,7 +10,9 @@ const ToDoList = () => {
     {
       title: "Reading a tech article",
       date: "Feb 8th 2024",
-      file: [],
+      file: [
+        "https://images.pexels.com/photos/8520627/pexels-photo-8520627.jpeg?auto=compress&cs=tinysrgb&w=600",
+      ],
       category: "Reading",
       todo: "Reading about the react 2024 articles ",
     },
@@ -23,9 +25,8 @@ const ToDoList = () => {
 
   return (
     <>
-    
       <AddTask onAdd={onAddItem} />
-      
+
       <CardLayer id="myTodoSection">
         <h2>MY TODO</h2>
         <hr />
@@ -37,33 +38,49 @@ const ToDoList = () => {
                   <div key={l.title}>
                     <TaskCard>
                       <StyledLink to={`/todo/${l.title}`}>
-                      <h3>{l.title}</h3>
-                      <p>{l.date}</p>
-                      <div>{l.file}</div>
-                      <p>{l.category}</p>
-                      <p>{l.todo}</p>
-                      <p style={{marginTop:'150px'}}>Read More</p>
+                        <div>
+                          <h3>{l.title}</h3>
+                        </div>
+                        <div>
+                          <p>{l.date}</p>
+                        </div>
+                        <div>
+                          <img
+                            id="img"
+                            src={l.file[0]}
+                            alt="imgFile"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
+                        <div>
+                          <p>{l.category}</p>
+                        </div>
+                        <div>
+                          <p>{l.todo}</p>
+                        </div>
+                        <p>Read More</p>
                       </StyledLink>
                     </TaskCard>
                   </div>
                 );
               })}
             <AddButton>
-              <h2 onClick={() => {
-              window.scrollTo({
-                top: 550,
-                behavior: "smooth",
-              });
-            }}>add</h2>
+              <h2
+                onClick={() => {
+                  window.scrollTo({
+                    top: 550,
+                    behavior: "smooth",
+                  });
+                }}
+              >
+                add
+              </h2>
             </AddButton>
           </EachCard>
         </CardList>
       </CardLayer>
-      <Todo list={list}
-      />
-      </>
-   
-   
+      <Todo list={list} />
+    </>
   );
 };
 
@@ -101,20 +118,42 @@ const TaskCard = styled.div`
   padding: 10px;
   width: 250px;
   height: 400px;
-`;
 
-const StyledLink = styled(Link)`
-  text-decoration: none; 
-  color: black; 
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+    font-size: 16px;
+  }
 
-  &:hover {
-    color: grey; 
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  p {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100px;
+    max-height: 100px;
+    font-size: 14px;
   }
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
 
-
-
+  &:hover {
+    color: grey;
+  }
+`;
 
 const AddButton = styled.div`
   display: flex;
