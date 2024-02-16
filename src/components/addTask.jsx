@@ -8,7 +8,7 @@ const AddTask = (props) => {
     {
       title: "",
       date: "",
-      file: "",
+      file: [],
       category: "",
       todo: "",
     },

@@ -8,6 +8,10 @@ import Todo from "./todo";
 import Footer from "./footer";
 
 const Header = ({ onClickRef }) => {
+  const handleLogoClick = () => {
+    window.location.href = "/";
+  };
+
   const clickHeaderButton = (id, offset = 80) => {
     const section = document.getElementById(id);
 
@@ -24,7 +28,7 @@ const Header = ({ onClickRef }) => {
   return (
     <>
       <HeaderLayer>
-        <Title>My task</Title>
+        <Title onClick={handleLogoClick}>My task</Title>
         <MenuLayer>
           <span
             onClick={() => {

@@ -4,6 +4,7 @@ import { useState } from "react";
 import AddTask from "./addTask";
 import { Link } from "react-router-dom";
 import Todo from "./todo";
+import { v4 as uuidv4 } from "uuid";
 
 const ToDoList = () => {
   const [list, setList] = useState([
@@ -18,8 +19,16 @@ const ToDoList = () => {
     },
   ]);
 
+  const [error, setError] = useState(null);
+
   const onAddItem = (item) => {
-    const newItem = { ...item, id: 10 };
+    if (Object.values(item).some((value) => value === "")) {
+      setError("Please fill in all input-fields.");
+      return;
+    }
+
+    setError(null);
+    const newItem = { ...item, id: uuidv4() };
     setList((list) => [newItem, ...list]);
   };
 
@@ -32,7 +41,7 @@ const ToDoList = () => {
         <hr />
         <CardList>
           <EachCard>
-            {list &&
+            {list ? (
               list.map((l) => {
                 return (
                   <div key={l.title}>
@@ -63,7 +72,10 @@ const ToDoList = () => {
                     </TaskCard>
                   </div>
                 );
-              })}
+              })
+            ) : (
+              <p>{error}</p>
+            )}
             <AddButton>
               <h2
                 onClick={() => {
