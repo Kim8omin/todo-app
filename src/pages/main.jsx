@@ -1,10 +1,8 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Header from "../components/header";
 import Banner from "../components/banner";
-import ToDoList from "../components/toDoList";
-import Todo from "../components/todo";
+import ToDoCRUD from "../components/ToDoCRUD";
 import Footer from "../components/footer";
-import AddTask from "../components/addTask";
 
 const Main = () => {
   const testRef = useRef();
@@ -20,7 +18,7 @@ const Main = () => {
     <div>
       <Header onClickRef={onClickRef} />
       <Banner testRef={testRef} />
-      <ToDoList />
+      <ToDoCRUD />
       <Footer />
     </div>
   );

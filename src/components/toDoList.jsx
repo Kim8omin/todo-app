@@ -1,81 +1,46 @@
 import React from "react";
 import styled from "styled-components";
-import { useState } from "react";
-import AddTask from "./addTask";
 import { Link } from "react-router-dom";
-import Todo from "./todo";
-import { v4 as uuidv4 } from "uuid";
 
-const ToDoList = () => {
-  const [list, setList] = useState([
-    {
-      title: "Reading a tech article",
-      date: "Feb 8th 2024",
-      file: [
-        "https://images.pexels.com/photos/8520627/pexels-photo-8520627.jpeg?auto=compress&cs=tinysrgb&w=600",
-      ],
-      category: "Reading",
-      todo: "Reading about the react 2024 articles ",
-    },
-  ]);
-
-  const [error, setError] = useState(null);
-
-  const onAddItem = (item) => {
-    if (Object.values(item).some((value) => value === "")) {
-      setError("Please fill in all input-fields.");
-      return;
-    }
-
-    setError(null);
-    const newItem = { ...item, id: uuidv4() };
-    setList((list) => [newItem, ...list]);
-  };
-
+const ToDoList = ({ list }) => {
   return (
-    <>
-      <AddTask onAdd={onAddItem} />
-
+    <div>
       <CardLayer id="myTodoSection">
         <h2>MY TODO</h2>
         <hr />
         <CardList>
           <EachCard>
-            {list ? (
-              list.map((l) => {
-                return (
-                  <div key={l.title}>
-                    <TaskCard>
-                      <StyledLink to={`/todo/${l.title}`}>
-                        <div>
-                          <h3>{l.title}</h3>
-                        </div>
-                        <div>
-                          <p>{l.date}</p>
-                        </div>
-                        <div>
-                          <img
-                            id="img"
-                            src={l.file[0]}
-                            alt="imgFile"
-                            style={{ width: "150px", height: "150px" }}
-                          />
-                        </div>
-                        <div>
-                          <p>{l.category}</p>
-                        </div>
-                        <div>
-                          <p>{l.todo}</p>
-                        </div>
-                        <p>Read More</p>
-                      </StyledLink>
-                    </TaskCard>
-                  </div>
-                );
-              })
-            ) : (
-              <p>{error}</p>
-            )}
+            {list?.map((todo) => {
+              return (
+                <div key={todo?.id}>
+                  <TaskCard>
+                    <StyledLink to={`/todo/${todo?.title}`}>
+                      <div>
+                        <h3>{todo?.title}</h3>
+                      </div>
+                      <div>
+                        <p>{todo?.date}</p>
+                      </div>
+                      <div>
+                        <img
+                          id="img"
+                          src={todo?.file[0]}
+                          alt="imgFile"
+                          style={{ width: "150px", height: "150px" }}
+                        />
+                      </div>
+                      <div>
+                        <p>{todo?.category}</p>
+                      </div>
+                      <div>
+                        <p>{todo?.todo}</p>
+                      </div>
+                      <p>Read More</p>
+                    </StyledLink>
+                  </TaskCard>
+                </div>
+              );
+            })}
             <AddButton>
               <h2
                 onClick={() => {
@@ -91,8 +56,7 @@ const ToDoList = () => {
           </EachCard>
         </CardList>
       </CardLayer>
-      <Todo list={list} />
-    </>
+    </div>
   );
 };
 

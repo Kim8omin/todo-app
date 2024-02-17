@@ -1,18 +1,17 @@
 import React from "react";
 import styled from "styled-components";
-import ToDoList from "./toDoList";
 import { useState, useEffect } from "react";
+import { v4 as uuidv4 } from "uuid";
 
-const AddTask = (props) => {
-  const [todo, setTodo] = useState([
-    {
-      title: "",
-      date: "",
-      file: [],
-      category: "",
-      todo: "",
-    },
-  ]);
+const AddTask = ({ addList }) => {
+  const [todo, setTodo] = useState({
+    id: uuidv4(),
+    title: "",
+    date: "",
+    file: [],
+    category: "",
+    todo: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -29,22 +28,26 @@ const AddTask = (props) => {
         return { ...todo, [name]: value };
       });
     }
-
-    console.log("handleChange 실행", todo);
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    props.onAdd(todo);
+    if (Object.values(todo)?.some((value) => !value)) {
+      window.alert("모든값을 입력하세요");
+      return;
+    }
+    addList(todo);
     setTodo({
+      id: uuidv4(),
       title: "",
       date: "",
       file: "",
       category: "",
       todo: "",
     });
-    console.log("handleSubmit 실행", todo);
   };
+
+  console.log(todo);
 
   return (
     <>
@@ -60,27 +63,27 @@ const AddTask = (props) => {
               type="text"
               placeholder="Title"
               name="title"
-              value={todo.title}
+              value={todo?.title}
               onChange={handleChange}
             />
             <input
               type="date"
               placeholder="Date"
               name="date"
-              value={todo.date}
+              value={todo?.date}
               onChange={handleChange}
             />
             <input
               type="text"
               placeholder="Category"
               name="category"
-              value={todo.category}
+              value={todo?.category}
               onChange={handleChange}
             />
             <textarea
               placeholder="Things to do..."
               name="todo"
-              value={todo.things}
+              value={todo?.todo}
               onChange={handleChange}
               style={{ height: "90px", fontFamily: "inherit" }}
             />

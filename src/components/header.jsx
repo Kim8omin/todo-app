@@ -1,11 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-scroll";
-import AddTask from "./addTask";
-import Banner from "./banner";
-import ToDoList from "./toDoList";
-import Todo from "./todo";
-import Footer from "./footer";
 
 const Header = ({ onClickRef }) => {
   const handleLogoClick = () => {
