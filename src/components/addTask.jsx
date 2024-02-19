@@ -13,6 +13,10 @@ const AddTask = ({ addList }) => {
     todo: "",
   });
 
+  const [inputerror, setInputError] = useState("");
+  const [categoryError, setCategoryError] = useState("");
+  const [fillOut, setFillOut] = useState("Please fill out every input field.");
+
   const handleChange = (event) => {
     const { name, value } = event.target;
 
@@ -22,11 +26,33 @@ const AddTask = ({ addList }) => {
         URL.createObjectURL(file)
       );
 
-      setTodo((todo) => ({ ...todo, [name]: fileUrl }));
+      setTodo((prevTodo) => ({ ...prevTodo, [name]: fileUrl }));
     } else {
-      setTodo((todo) => {
-        return { ...todo, [name]: value };
-      });
+      setTodo((prevTodo) => ({ ...prevTodo, [name]: value }));
+    }
+
+    if (name === "title") {
+      if (value.trim().length > 0 && value.trim().length >= 10) {
+        setInputError("Title should be 1 to 10 letters.");
+      } else {
+        setInputError("");
+      }
+    }
+
+    if (name === "category") {
+      if (value === "category") {
+        setCategoryError("Please select the category");
+      } else {
+        setCategoryError("");
+      }
+    }
+
+    if (name === "date" && name === "todo" && name === "file") {
+      if (todo.date && todo.todo && todo.file.length > 0) {
+        setFillOut("");
+      } else {
+        setFillOut("Please fill out every input field.");
+      }
     }
   };
 
@@ -48,6 +74,7 @@ const AddTask = ({ addList }) => {
   };
 
   console.log(todo);
+  console.log(fillOut);
 
   return (
     <>
@@ -66,6 +93,7 @@ const AddTask = ({ addList }) => {
               value={todo?.title}
               onChange={handleChange}
             />
+            {inputerror && <p>{inputerror}</p>}
             <input
               type="date"
               placeholder="Date"
@@ -73,13 +101,17 @@ const AddTask = ({ addList }) => {
               value={todo?.date}
               onChange={handleChange}
             />
-            <input
-              type="text"
-              placeholder="Category"
+            <select
               name="category"
               value={todo?.category}
               onChange={handleChange}
-            />
+            >
+              <option value="category">category</option>
+              <option value="study">study</option>
+              <option value="work">work</option>
+              <option value="diary">diary</option>
+            </select>
+            {categoryError && <p>{categoryError}</p>}
             <textarea
               placeholder="Things to do..."
               name="todo"
@@ -88,6 +120,7 @@ const AddTask = ({ addList }) => {
               style={{ height: "90px", fontFamily: "inherit" }}
             />
             <input type="file" name="file" onChange={handleChange} />
+            {fillOut && <p>{fillOut}</p>}
             <button type="submit">SUBMIT</button>
           </form>
         </FormLayer>
@@ -125,6 +158,7 @@ const FormLayer = styled.div`
     margin: 20px;
 
     input,
+    select,
     textarea {
       width: 620px;
       height: 43px;
