@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import ErrorFunc from "../util/ErrorFunc";
 
 const AddTask = ({ addList }) => {
   const [todo, setTodo] = useState({
@@ -13,9 +14,25 @@ const AddTask = ({ addList }) => {
     todo: "",
   });
 
+  //에러처리1
   const [inputerror, setInputError] = useState("");
   const [categoryError, setCategoryError] = useState("");
   const [fillOut, setFillOut] = useState("Please fill out every input field.");
+
+  //에러처리2
+  const inputTitle = useRef(null);
+  const inputDate = useRef(null);
+  const inputFile = useRef(null);
+  const inputCategory = useRef(null);
+  const inputTodo = useRef(null);
+
+  const [error, setError] = useState({
+    titleError: "",
+    dateError: "",
+    categoryError: "",
+    todoError: "",
+    fileError: "",
+  });
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -58,23 +75,67 @@ const AddTask = ({ addList }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (Object.values(todo)?.some((value) => !value)) {
-      window.alert("모든값을 입력하세요");
+
+    if (todo.title.trim().length === 0) {
+      setError((prevError) => ({
+        ...prevError,
+        titleError: "please fill in the title",
+      }));
+      inputTitle.current.focus();
       return;
     }
+    // if (todo.date.trim().length === 0) {
+    //   return { message: "Please fill in the date.", ref };
+    // }
+    // if (todo.category.trim().length === 0) {
+    //   return { message: "Please select the category.", ref };
+    // }
+    // if (todo.todo.trim().length === 0) {
+    //   return { message: "Please fill in the todo field.", ref };
+    // }
+    // if (todo.file.length < 1) {
+    //   return { message: "Please add a file.", ref };
+    // }
+
+    // const titleError = ErrorFunc(todo.title, inputTitle);
+    // const dateError = ErrorFunc(todo.date, inputDate);
+    // const categoryError = ErrorFunc(todo.category, inputCategory);
+    // const todoError = ErrorFunc(todo.todo, inputTodo);
+    // const fileError = ErrorFunc(todo.file, inputFile);
+
+    // if (titleError) {
+    //   window.alert(titleError?.message);
+    //   titleError?.ref.current.focus();
+    //   return;
+    // }
+    // if (dateError) {
+    //   window.alert(dateError?.message);
+    //   dateError?.ref.current.focus();
+    //   return;
+    // }
+
+    //       dateError?.message ||
+    //       categoryError?.message ||
+    //       todoError?.message ||
+    //       fileError?.message
+    //   );
+    //   titleError?.ref?.current?.focus();
+
+    //   return;
+    // }
+
+    // 에러가 없는 경우
     addList(todo);
+
     setTodo({
       id: uuidv4(),
       title: "",
       date: "",
-      file: "",
+      file: [],
       category: "",
       todo: "",
     });
   };
-
-  console.log(todo);
-  console.log(fillOut);
 
   return (
     <>
@@ -91,20 +152,24 @@ const AddTask = ({ addList }) => {
               placeholder="Title"
               name="title"
               value={todo?.title}
+              ref={inputTitle}
               onChange={handleChange}
             />
             {inputerror && <p>{inputerror}</p>}
+            {error && <p>{error.titleError}</p>}
             <input
               type="date"
               placeholder="Date"
               name="date"
               value={todo?.date}
               onChange={handleChange}
+              ref={inputDate}
             />
             <select
               name="category"
               value={todo?.category}
               onChange={handleChange}
+              ref={inputCategory}
             >
               <option value="category">category</option>
               <option value="study">study</option>
@@ -118,8 +183,14 @@ const AddTask = ({ addList }) => {
               value={todo?.todo}
               onChange={handleChange}
               style={{ height: "90px", fontFamily: "inherit" }}
+              ref={inputTodo}
             />
-            <input type="file" name="file" onChange={handleChange} />
+            <input
+              type="file"
+              name="file"
+              onChange={handleChange}
+              ref={inputFile}
+            />
             {fillOut && <p>{fillOut}</p>}
             <button type="submit">SUBMIT</button>
           </form>
