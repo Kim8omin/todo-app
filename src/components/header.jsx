@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import MediaQuery from "react-responsive";
+import hamburger from "../assets/hamburger.png";
 
 const Header = ({ onClickRef }) => {
+  const [toggle, setToggle] = useState(false);
+
+  const onToggle = () => {
+    setToggle(!toggle);
+  };
+
   const handleLogoClick = () => {
     window.location.href = "/";
   };
@@ -22,79 +30,113 @@ const Header = ({ onClickRef }) => {
   return (
     <>
       <HeaderLayer>
-        <Title onClick={handleLogoClick}>My task</Title>
-        <MenuLayer>
-          <span
-            onClick={() => {
-              // onClickRef("banner");
+        <MediaQuery minWidth={769}>
+          <Title onClick={handleLogoClick}>My task</Title>
+          <MenuLayer>
+            <span
+              onClick={() => {
+                // onClickRef("banner");
 
-              clickHeaderButton("mainSection", 99);
-              // const mainSection= document.getElementById("mainSection")
+                clickHeaderButton("mainSection", 99);
+                // const mainSection= document.getElementById("mainSection")
 
-              // if (mainSection){
-              //   const mainPosition=mainSection.offsetTop;
-              //   window.scrollTo({
-              //     top: mainPosition-99,
-              //     behavior: "smooth",
-              //   });
-              // console.log(mainPosition)
+                // if (mainSection){
+                //   const mainPosition=mainSection.offsetTop;
+                //   window.scrollTo({
+                //     top: mainPosition-99,
+                //     behavior: "smooth",
+                //   });
+                // console.log(mainPosition)
 
-              //   }}
-            }}
-            // onClick={()=>{
-            //   clickButton('banner');
-            // }}
-          >
-            Home
-          </span>
-          <span
-            onClick={() => {
-              //   const addSection = document.getElementById("addTodoSection");
-
-              //   if (addSection) {
-              //     const targetPosition = addSection.offsetTop;
-
-              //     window.scrollTo({
-              //       top: targetPosition-80,
-              //       behavior: "smooth",
-              //     });
-              //   }
-              // }}
+                //   }}
+              }}
               // onClick={()=>{
-              //   clickButton('addTodo');
+              //   clickButton('banner');
               // }}
-              clickHeaderButton("addTodoSection");
-            }}
-          >
-            Add Task
-          </span>
-          <span
-            onClick={() => {
-              clickHeaderButton("myTodoSection");
-              //   const todoSection = document.getElementById("myTodoSection");
+            >
+              Home
+            </span>
+            <span
+              onClick={() => {
+                //   const addSection = document.getElementById("addTodoSection");
 
-              //   if (todoSection) {
-              //     const targetPosition = todoSection.offsetTop;
+                //   if (addSection) {
+                //     const targetPosition = addSection.offsetTop;
 
-              //     window.scrollTo({
-              //       top: targetPosition - 80,
-              //       behavior: "smooth",
-              //     });
-              //     console.log(targetPosition);
-              //   }
-              // }}
-            }}
-          >
-            My Todo
-          </span>
-          <span
-            onClick={() => {
-              clickHeaderButton("myTodaySection");
-            }}
-          >
-            Today I Learn
-          </span>
-        </MenuLayer>
+                //     window.scrollTo({
+                //       top: targetPosition-80,
+                //       behavior: "smooth",
+                //     });
+                //   }
+                // }}
+                // onClick={()=>{
+                //   clickButton('addTodo');
+                // }}
+                clickHeaderButton("addTodoSection");
+              }}
+            >
+              Add Task
+            </span>
+            <span
+              onClick={() => {
+                clickHeaderButton("myTodoSection");
+                //   const todoSection = document.getElementById("myTodoSection");
+
+                //   if (todoSection) {
+                //     const targetPosition = todoSection.offsetTop;
+
+                //     window.scrollTo({
+                //       top: targetPosition - 80,
+                //       behavior: "smooth",
+                //     });
+                //     console.log(targetPosition);
+                //   }
+                // }}
+              }}
+            >
+              To do List
+            </span>
+            <span
+              onClick={() => {
+                clickHeaderButton("myTodaySection");
+              }}
+            >
+              Recent
+            </span>
+          </MenuLayer>
+        </MediaQuery>
+        <MediaQuery maxWidth={768}>
+          <MobileLayer toggle={toggle}>
+            <img
+              src={hamburger}
+              alt="hamburger"
+              onClick={onToggle}
+              width="30px"
+            />
+          </MobileLayer>
+          {toggle && <Overlay onClick={onToggle} />}
+          {toggle && (
+            <NavWrapped>
+              <span>
+                <Nav onClick={onToggle}>
+                  <NavText>Add Task</NavText>
+                </Nav>
+              </span>
+
+              <span>
+                <Nav onClick={onToggle}>
+                  <NavText>To do List</NavText>
+                </Nav>
+              </span>
+              <span>
+                <Nav onClick={onToggle}>
+                  <NavText>Recent</NavText>
+                </Nav>
+              </span>
+              <div className="division-line"></div>
+            </NavWrapped>
+          )}
+        </MediaQuery>
       </HeaderLayer>
     </>
   );
@@ -142,5 +184,46 @@ const MenuLayer = styled.div`
     &:hover {
       font-weight: bold;
     }
+  }
+`;
+
+const MobileLayer = styled.div`
+  display: ${({ toggle }) => (toggle ? "none" : "flex")};
+`;
+
+const Overlay = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+`;
+
+const NavWrapped = styled.div`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  flex-direction: column;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  line-height: 3;
+
+  .division-line {
+    border-top: 1px solid #444444;
+  }
+`;
+
+const Nav = styled.div`
+  text-decoration: none;
+`;
+
+const NavText = styled.h4`
+  color: white;
+  &:hover {
+    color: yellow;
   }
 `;

@@ -84,47 +84,71 @@ const AddTask = ({ addList }) => {
       inputTitle.current.focus();
       return;
     }
-    // if (todo.date.trim().length === 0) {
-    //   return { message: "Please fill in the date.", ref };
-    // }
-    // if (todo.category.trim().length === 0) {
-    //   return { message: "Please select the category.", ref };
-    // }
-    // if (todo.todo.trim().length === 0) {
-    //   return { message: "Please fill in the todo field.", ref };
-    // }
-    // if (todo.file.length < 1) {
-    //   return { message: "Please add a file.", ref };
-    // }
 
-    // const titleError = ErrorFunc(todo.title, inputTitle);
-    // const dateError = ErrorFunc(todo.date, inputDate);
-    // const categoryError = ErrorFunc(todo.category, inputCategory);
-    // const todoError = ErrorFunc(todo.todo, inputTodo);
-    // const fileError = ErrorFunc(todo.file, inputFile);
+    if (todo.title.trim().length >= 3) {
+      setError((prevError) => ({
+        ...prevError,
+        titleError: "",
+      }));
+    }
 
-    // if (titleError) {
-    //   window.alert(titleError?.message);
-    //   titleError?.ref.current.focus();
-    //   return;
-    // }
-    // if (dateError) {
-    //   window.alert(dateError?.message);
-    //   dateError?.ref.current.focus();
-    //   return;
-    // }
+    if (todo.date.trim().length === 0) {
+      setError((prevError) => ({
+        ...prevError,
+        dateError: "please fill in the date",
+      }));
+      inputDate.current.focus();
+      return;
+    }
 
-    //       dateError?.message ||
-    //       categoryError?.message ||
-    //       todoError?.message ||
-    //       fileError?.message
-    //   );
-    //   titleError?.ref?.current?.focus();
+    if (todo.title.trim().length >= 1) {
+      setError((prevError) => ({
+        ...prevError,
+        dateError: "",
+      }));
+    }
 
-    //   return;
-    // }
+    if (todo.category.trim().length === 0 || todo.category === "category") {
+      setError((prevError) => ({
+        ...prevError,
+        categoryError: "please choose one from the category",
+      }));
+      inputCategory.current.focus();
+      return;
+    }
 
-    // 에러가 없는 경우
+    if (todo.category.trim().length >= 1 && todo.category === !"category") {
+      setError((prevError) => ({
+        ...prevError,
+        categoryError: "",
+      }));
+    }
+
+    if (todo.todo.trim().length === 0) {
+      setError((prevError) => ({
+        ...prevError,
+        todoError: "please write down the details",
+      }));
+      inputTodo.current.focus();
+      return;
+    }
+
+    if (todo.todo.trim().length >= 1) {
+      setError((prevError) => ({
+        ...prevError,
+        todoError: "",
+      }));
+    }
+
+    if (todo.file.length < 1) {
+      setError((prevError) => ({
+        ...prevError,
+        fileError: "please choose the image file to upload",
+      }));
+      inputFile.current.focus();
+      return;
+    }
+
     addList(todo);
 
     setTodo({
@@ -136,6 +160,55 @@ const AddTask = ({ addList }) => {
       todo: "",
     });
   };
+  //input이 써지면 에러문구가 없어지는 부분
+  useEffect(() => {
+    if (error.titleError && todo.title.trim().length >= 3) {
+      setError((prevError) => ({
+        ...prevError,
+        titleError: "",
+      }));
+    }
+  }, [error.titleError, todo.title]);
+
+  useEffect(() => {
+    if (error.dateError && todo.date.trim().length >= 1) {
+      setError((prevError) => ({
+        ...prevError,
+        dateError: "",
+      }));
+    }
+  }, [error.dateError, todo.date]);
+
+  useEffect(() => {
+    if (
+      error.categoryError &&
+      todo.category.trim().length >= 1 &&
+      todo.category !== "category"
+    ) {
+      setError((prevError) => ({
+        ...prevError,
+        categoryError: "",
+      }));
+    }
+  }, [error.categoryError, todo.category]);
+
+  useEffect(() => {
+    if (error.todoError && todo.todo.trim().length >= 1) {
+      setError((prevError) => ({
+        ...prevError,
+        todoError: "",
+      }));
+    }
+  }, [error.todoError, todo.todo]);
+
+  useEffect(() => {
+    if (error.fileError && todo.file.length > 0) {
+      setError((prevError) => ({
+        ...prevError,
+        todoError: "",
+      }));
+    }
+  }, [error.fileError, todo.file]);
 
   return (
     <>
@@ -156,7 +229,9 @@ const AddTask = ({ addList }) => {
               onChange={handleChange}
             />
             {inputerror && <p>{inputerror}</p>}
-            {error && <p>{error.titleError}</p>}
+            {Object.values(error).some((value) => value) && (
+              <p style={{ color: "red" }}>{error.titleError}</p>
+            )}
             <input
               type="date"
               placeholder="Date"
@@ -165,6 +240,9 @@ const AddTask = ({ addList }) => {
               onChange={handleChange}
               ref={inputDate}
             />
+            {Object.values(error).some((value) => value) && (
+              <p style={{ color: "red" }}>{error.dateError}</p>
+            )}
             <select
               name="category"
               value={todo?.category}
@@ -177,6 +255,9 @@ const AddTask = ({ addList }) => {
               <option value="diary">diary</option>
             </select>
             {categoryError && <p>{categoryError}</p>}
+            {Object.values(error).some((value) => value) && (
+              <p style={{ color: "red" }}>{error.categoryError}</p>
+            )}
             <textarea
               placeholder="Things to do..."
               name="todo"
@@ -185,12 +266,18 @@ const AddTask = ({ addList }) => {
               style={{ height: "90px", fontFamily: "inherit" }}
               ref={inputTodo}
             />
+            {Object.values(error).some((value) => value) && (
+              <p style={{ color: "red" }}>{error.todoError}</p>
+            )}
             <input
               type="file"
               name="file"
               onChange={handleChange}
               ref={inputFile}
             />
+            {Object.values(error).some((value) => value) && (
+              <p style={{ color: "red" }}>{error.fileError}</p>
+            )}
             {fillOut && <p>{fillOut}</p>}
             <button type="submit">SUBMIT</button>
           </form>
