@@ -296,6 +296,7 @@ max-height: 545px;
 background-color: #F1E3D9;
 text-align: center;
 padding: 50px;
+
 `;
 
 const TitleLayer = styled.div`
@@ -318,23 +319,26 @@ const FormLayer = styled.div`
     input,
     select,
     textarea {
-      width: 620px;
-      height: 43px;
+      width: 85%;
+      height: 45px;
       border: 1px solid #d4d7e5;
+      border-radius: 5px;
     }
 
     hr {
       width: 50px;
+      height: 1px;
     }
 
     button {
       background-color: #c07848;
       border: 1px solid #c07848;
       color: white;
-      width: 628px;
+      width: 85%;
       height: 45px;
       font-size: 16.5px;
       cursor: pointer;
+      border-radius: 5px;
     }
   }
 `;

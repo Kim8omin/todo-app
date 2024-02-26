@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import sunflower from "../assets/sunflower.jpg";
+import FadeInUpEffect from "../styles/FadeInUp";
 
 function Todo({ list }) {
   console.log(list);
@@ -8,7 +8,7 @@ function Todo({ list }) {
     <div id="myTodaySection">
       <ToDoLayer>
         <TextLayer>
-          <h2>{list?.[0]?.title}</h2>
+          <FadeInUpEffect>{list?.[0]?.title}</FadeInUpEffect>
           <hr />
           <p>{list?.[0]?.date}</p>
           <p>{list?.[0].category}</p>
@@ -26,26 +26,41 @@ const ToDoLayer = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-  aling-items: center;
+  align-items: center;
   height: 500px;
-  padding: 100px 0;
-  background-color: #f1e3d9;
+  padding: 50px;
+  background-color: white;
+
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
 `;
 
 const TextLayer = styled.div`
-width: 40%;
-margin: 20px;
-line-height: 1.2;
+  width: 40%;
+  margin: 20px;
+  line-height: 1.2;
 
-p {
-  50px;
-}
+  p {
+    margin-bottom: 10px;
+  }
 
+  @media (max-width: 768px) {
+    width: 80%;
+  }
 `;
 
-const Title = styled.h2``; // 적절한 헤딩 요소를 사용하고 스타일링
-const P = styled.p``;
 const Img = styled.img`
   width: 500px;
   height: 500px;
+
+  @media (max-width: 768px) {
+    width: 45%;
+    height: auto;
+    padding-top: 30px;
+  }
 `;

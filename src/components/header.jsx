@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import MediaQuery from "react-responsive";
 import hamburger from "../assets/hamburger.png";
+import cancel from "../assets/cancel.png";
 
 const Header = ({ onClickRef }) => {
   const [toggle, setToggle] = useState(false);
@@ -77,6 +78,14 @@ const Header = ({ onClickRef }) => {
             >
               Add Task
             </span>
+
+            <span
+              onClick={() => {
+                clickHeaderButton("myTodaySection");
+              }}
+            >
+              Recent
+            </span>
             <span
               onClick={() => {
                 clickHeaderButton("myTodoSection");
@@ -96,13 +105,6 @@ const Header = ({ onClickRef }) => {
             >
               To do List
             </span>
-            <span
-              onClick={() => {
-                clickHeaderButton("myTodaySection");
-              }}
-            >
-              Recent
-            </span>
           </MenuLayer>
         </MediaQuery>
         <MediaQuery maxWidth={768}>
@@ -111,30 +113,44 @@ const Header = ({ onClickRef }) => {
               src={hamburger}
               alt="hamburger"
               onClick={onToggle}
-              width="30px"
+              width="25px"
             />
+            <h2>My Task</h2>
           </MobileLayer>
           {toggle && <Overlay onClick={onToggle} />}
           {toggle && (
-            <NavWrapped>
-              <span>
-                <Nav onClick={onToggle}>
-                  <NavText>Add Task</NavText>
-                </Nav>
-              </span>
+            <ToggleLayer>
+              <img
+                src={cancel}
+                alt="cancel"
+                onClick={onToggle}
+                width="25px"
+                id="cancel"
+              />
+              <NavWrapped>
+                <span>
+                  <Nav onClick={onToggle}>
+                    <NavText>Home</NavText>
+                  </Nav>
+                </span>
+                <span>
+                  <Nav onClick={onToggle}>
+                    <NavText>Add Task</NavText>
+                  </Nav>
+                </span>
 
-              <span>
-                <Nav onClick={onToggle}>
-                  <NavText>To do List</NavText>
-                </Nav>
-              </span>
-              <span>
-                <Nav onClick={onToggle}>
-                  <NavText>Recent</NavText>
-                </Nav>
-              </span>
-              <div className="division-line"></div>
-            </NavWrapped>
+                <span>
+                  <Nav onClick={onToggle}>
+                    <NavText>Recent</NavText>
+                  </Nav>
+                </span>
+                <span>
+                  <Nav onClick={onToggle}>
+                    <NavText>To do List</NavText>
+                  </Nav>
+                </span>
+              </NavWrapped>
+            </ToggleLayer>
           )}
         </MediaQuery>
       </HeaderLayer>
@@ -155,6 +171,11 @@ const HeaderLayer = styled.div`
   position: sticky;
   top: 0px;
   z-index: 10;
+
+  #cancel {
+    margin: 20px;
+    cursor: pointer;
+  }
 `;
 
 const Title = styled.h2`
@@ -188,7 +209,24 @@ const MenuLayer = styled.div`
 `;
 
 const MobileLayer = styled.div`
+  width: 100%;
   display: ${({ toggle }) => (toggle ? "none" : "flex")};
+  flex-direction: row;
+  align-items: center;
+  text-align: center;
+
+  img {
+    cursor: pointer;
+    padding: 20px;
+  }
+
+  h2 {
+    color: white;
+    font-size: 1.3rem;
+  }
+`;
+const ToggleLayer = styled.div`
+  display: flex;
 `;
 
 const Overlay = styled.div`
@@ -197,7 +235,7 @@ const Overlay = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: black;
   z-index: -1;
 `;
 
@@ -211,10 +249,6 @@ const NavWrapped = styled.div`
   color: white;
   text-align: center;
   line-height: 3;
-
-  .division-line {
-    border-top: 1px solid #444444;
-  }
 `;
 
 const Nav = styled.div`
@@ -222,8 +256,9 @@ const Nav = styled.div`
 `;
 
 const NavText = styled.h4`
+  cursor: pointer;
   color: white;
   &:hover {
-    color: yellow;
+    color: #f1e3d9;
   }
 `;
