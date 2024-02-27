@@ -115,7 +115,10 @@ const Header = ({ onClickRef }) => {
               onClick={onToggle}
               width="25px"
             />
-            <h2>My Task</h2>
+            <div>
+              <h2>My Task</h2>
+            </div>
+            <div />
           </MobileLayer>
           {toggle && <Overlay onClick={onToggle} />}
           {toggle && (
@@ -213,6 +216,7 @@ const MobileLayer = styled.div`
   display: ${({ toggle }) => (toggle ? "none" : "flex")};
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   text-align: center;
 
   img {
@@ -221,10 +225,14 @@ const MobileLayer = styled.div`
   }
 
   h2 {
+    margin: 0 auto;
+    padding: 0;
     color: white;
-    font-size: 1.3rem;
+    font-size: 1.1rem;
+    text-align: center;
   }
 `;
+
 const ToggleLayer = styled.div`
   display: flex;
 `;

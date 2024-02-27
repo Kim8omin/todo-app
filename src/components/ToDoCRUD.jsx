@@ -1,15 +1,15 @@
 import React from "react";
-import styled from "styled-components";
 import { useState } from "react";
 import AddTask from "./addTask";
-import { Link } from "react-router-dom";
 import Todo from "./todo";
 import { v4 as uuidv4 } from "uuid";
 import ToDoList from "./ToDoList";
+import Main from "../pages/main";
 
 const ToDoCRUD = () => {
   const [list, setList] = useState([
     {
+      id: 10,
       title: "Reading a tech article",
       date: "Feb 8th 2024",
       file: [
@@ -23,7 +23,7 @@ const ToDoCRUD = () => {
   const addList = (todo) => {
     setList((list) => [todo, ...list]);
   };
-
+  console.log("갱신된 목록이 추가된 list는 이것입니다", list);
   return (
     <>
       <AddTask addList={addList} />

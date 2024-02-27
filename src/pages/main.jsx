@@ -4,9 +4,8 @@ import Banner from "../components/banner";
 import ToDoCRUD from "../components/ToDoCRUD";
 import Footer from "../components/footer";
 
-const Main = () => {
+const Main = ({ list }) => {
   const testRef = useRef();
-  console.log(testRef.current);
 
   const onClickRef = (section) => {
     if (section === "banner") {
@@ -18,7 +17,7 @@ const Main = () => {
     <div>
       <Header onClickRef={onClickRef} />
       <Banner testRef={testRef} />
-      <ToDoCRUD />
+      <ToDoCRUD list={list} />
       <Footer />
     </div>
   );

@@ -45,7 +45,7 @@ const ToDoList = ({ list }) => {
                 return (
                   <div key={todo?.id}>
                     <TaskCard>
-                      <StyledLink to={`/todo/${todo?.title}`}>
+                      <StyledLink to={`/todo/${String(todo?.id)}`}>
                         <div>
                           <h3>{todo?.title}</h3>
                         </div>

@@ -150,6 +150,7 @@ const AddTask = ({ addList }) => {
     }
 
     addList(todo);
+    console.log("전송된 todo는 이것입니다.", todo);
 
     setTodo({
       id: uuidv4(),
@@ -160,6 +161,7 @@ const AddTask = ({ addList }) => {
       todo: "",
     });
   };
+
   //input이 써지면 에러문구가 없어지는 부분
   useEffect(() => {
     if (error.titleError && todo.title.trim().length >= 3) {
