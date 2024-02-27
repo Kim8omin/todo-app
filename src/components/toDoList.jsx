@@ -1,61 +1,93 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+//import AnimatedHeading from "../styles/FadeInUp";
+import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 
 const ToDoList = ({ list }) => {
+  // const [isInViewport, setIsInViewport] = useState(false);
+  // const ref = useRef(null);
+
+  // useEffect(() => {
+  //   if (!ref.current) return; // 요소가 아직 준비되지 않은 경우 중단
+
+  //   const callback = (entries) => {
+  //     entries.forEach((entry) => {
+  //       if (entry.isIntersecting) {
+  //         // 요소가 뷰포트에 나타났을 경우
+  //         setIsInViewport(true);
+  //       } else {
+  //         // 요소가 뷰포트를 벗어난 경우
+  //         setIsInViewport(false);
+  //       }
+  //     });
+  //   };
+
+  //   const options = { root: null, rootMargin: "0px", threshold: 0 };
+
+  //   const observer = new IntersectionObserver(callback, options);
+  //   observer.observe(ref.current); // 요소 관찰 시작
+
+  //   return () => {
+  //     observer.disconnect(); // 컴포넌트 언마운트 시 관찰 중단
+  //   };
+  // }, []);
+
   return (
     <div id="myTodoSection">
-      <CardLayer>
-        <h2>To do List</h2>
-        <hr />
-        <CardList>
-          <EachCard>
-            {list?.map((todo) => {
-              return (
-                <div key={todo?.id}>
-                  <TaskCard>
-                    <StyledLink to={`/todo/${todo?.title}`}>
-                      <div>
-                        <h3>{todo?.title}</h3>
-                      </div>
-                      <div>
-                        <p>{todo?.date}</p>
-                      </div>
-                      <div>
-                        <img
-                          id="img"
-                          src={todo?.file[0]}
-                          alt="imgFile"
-                          style={{ width: "150px", height: "150px" }}
-                        />
-                      </div>
-                      <div>
-                        <p>{todo?.category}</p>
-                      </div>
-                      <div>
-                        <p>{todo?.todo}</p>
-                      </div>
-                      <p>Read More</p>
-                    </StyledLink>
-                  </TaskCard>
-                </div>
-              );
-            })}
-            <AddButton>
-              <h2
-                onClick={() => {
-                  window.scrollTo({
-                    top: 550,
-                    behavior: "smooth",
-                  });
-                }}
-              >
-                add
-              </h2>
-            </AddButton>
-          </EachCard>
-        </CardList>
-      </CardLayer>
+      <ScrollAnimationContainer>
+        <CardLayer>
+          <h2>To do List</h2>
+          <hr />
+          <CardList>
+            <EachCard>
+              {list?.map((todo) => {
+                return (
+                  <div key={todo?.id}>
+                    <TaskCard>
+                      <StyledLink to={`/todo/${todo?.title}`}>
+                        <div>
+                          <h3>{todo?.title}</h3>
+                        </div>
+                        <div>
+                          <p>{todo?.date}</p>
+                        </div>
+                        <div>
+                          <img
+                            id="img"
+                            src={todo?.file[0]}
+                            alt="imgFile"
+                            style={{ width: "150px", height: "150px" }}
+                          />
+                        </div>
+                        <div>
+                          <p>{todo?.category}</p>
+                        </div>
+                        <div>
+                          <p>{todo?.todo}</p>
+                        </div>
+                        <p>Read More</p>
+                      </StyledLink>
+                    </TaskCard>
+                  </div>
+                );
+              })}
+              <AddButton>
+                <h2
+                  onClick={() => {
+                    window.scrollTo({
+                      top: 550,
+                      behavior: "smooth",
+                    });
+                  }}
+                >
+                  add
+                </h2>
+              </AddButton>
+            </EachCard>
+          </CardList>
+        </CardLayer>
+      </ScrollAnimationContainer>
     </div>
   );
 };
