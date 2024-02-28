@@ -4,7 +4,7 @@ import Banner from "../components/banner";
 import ToDoCRUD from "../components/ToDoCRUD";
 import Footer from "../components/footer";
 
-const Main = ({ list }) => {
+const Main = ({ list, addList }) => {
   const testRef = useRef();
 
   const onClickRef = (section) => {
@@ -17,7 +17,7 @@ const Main = ({ list }) => {
     <div>
       <Header onClickRef={onClickRef} />
       <Banner testRef={testRef} />
-      <ToDoCRUD list={list} />
+      <ToDoCRUD list={list} addList={addList} />
       <Footer />
     </div>
   );

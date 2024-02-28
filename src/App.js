@@ -19,17 +19,21 @@ function App() {
     },
   ]);
 
+  const addList = (todo) => {
+    setList((list) => [todo, ...list]);
+  };
+
+  console.log("새롭게 갱신된 list는 이것다.", list);
+
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Main list={list} />} />
+        <Route path="/" element={<Main list={list} addList={addList} />} />
         <Route
           path="/todo/:id"
           element={
             <Layout>
-              <TodoDetail
-                list={list.map((todo) => ({ ...todo, id: String(todo.id) }))}
-              />
+              <TodoDetail list={list} />
             </Layout>
           }
         />
