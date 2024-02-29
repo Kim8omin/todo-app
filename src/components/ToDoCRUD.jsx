@@ -1,9 +1,9 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import AddTask from "./addTask";
 import Todo from "./todo";
 import ToDoList from "./ToDoList";
-import { add } from "../slice/slice";
+import { addActions } from "../slice/slice";
 
 const ToDoCRUD = () => {
   // const [list, setList] = useState([
@@ -23,10 +23,9 @@ const ToDoCRUD = () => {
   //   setList((list) => [todo, ...list]);
   // };
   const dispatch = useDispatch();
-  const list = useSelector((state) => state.addTask);
 
   const addList = (todo) => {
-    dispatch(add(todo));
+    dispatch(addActions.add(todo));
   };
 
   return (

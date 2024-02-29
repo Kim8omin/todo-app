@@ -4,6 +4,7 @@ import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 
 function Todo({ list }) {
   //const list = useSelector((state) => state);
+
   return (
     <div id="myTodaySection">
       <ScrollAnimationContainer>

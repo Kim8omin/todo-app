@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 
 const ToDoList = () => {
-  const list = useSelector((state) => state);
+  const list = useSelector((state) => state.addTask.todos);
+
   console.log(list);
 
   return (
