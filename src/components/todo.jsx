@@ -1,22 +1,22 @@
-//import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 
-function Todo({ list }) {
-  //const list = useSelector((state) => state);
+function Todo() {
+  const recentList = useSelector((state) => state.addTask.todos);
 
   return (
     <div id="myTodaySection">
       <ScrollAnimationContainer>
         <ToDoLayer>
           <TextLayer>
-            <h2>{list?.[0]?.title}</h2>
+            <h2>{recentList?.[0]?.title}</h2>
             <hr />
-            <p>{list?.[0]?.date}</p>
-            <p>{list?.[0].category}</p>
-            <p>{list?.[0].todo}</p>
+            <p>{recentList?.[0]?.date}</p>
+            <p>{recentList?.[0]?.category}</p>
+            <p>{recentList?.[0]?.todo}</p>
           </TextLayer>
-          <Img src={list?.[0].file} alt="img" />
+          <Img src={recentList?.[0]?.file} alt="img" />
         </ToDoLayer>
       </ScrollAnimationContainer>
     </div>
