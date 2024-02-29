@@ -36,43 +36,13 @@ const Header = ({ onClickRef }) => {
           <MenuLayer>
             <span
               onClick={() => {
-                // onClickRef("banner");
-
                 clickHeaderButton("mainSection", 99);
-                // const mainSection= document.getElementById("mainSection")
-
-                // if (mainSection){
-                //   const mainPosition=mainSection.offsetTop;
-                //   window.scrollTo({
-                //     top: mainPosition-99,
-                //     behavior: "smooth",
-                //   });
-                // console.log(mainPosition)
-
-                //   }}
               }}
-              // onClick={()=>{
-              //   clickButton('banner');
-              // }}
             >
               Home
             </span>
             <span
               onClick={() => {
-                //   const addSection = document.getElementById("addTodoSection");
-
-                //   if (addSection) {
-                //     const targetPosition = addSection.offsetTop;
-
-                //     window.scrollTo({
-                //       top: targetPosition-80,
-                //       behavior: "smooth",
-                //     });
-                //   }
-                // }}
-                // onClick={()=>{
-                //   clickButton('addTodo');
-                // }}
                 clickHeaderButton("addTodoSection");
               }}
             >
@@ -89,18 +59,6 @@ const Header = ({ onClickRef }) => {
             <span
               onClick={() => {
                 clickHeaderButton("myTodoSection");
-                //   const todoSection = document.getElementById("myTodoSection");
-
-                //   if (todoSection) {
-                //     const targetPosition = todoSection.offsetTop;
-
-                //     window.scrollTo({
-                //       top: targetPosition - 80,
-                //       behavior: "smooth",
-                //     });
-                //     console.log(targetPosition);
-                //   }
-                // }}
               }}
             >
               To do List

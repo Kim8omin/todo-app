@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from "react";
-import styled, { keyframes } from "styled-components";
+//import { useSelector } from "react-redux";
+import styled from "styled-components";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 
 function Todo({ list }) {
+  //const list = useSelector((state) => state);
   return (
     <div id="myTodaySection">
       <ScrollAnimationContainer>

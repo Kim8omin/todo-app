@@ -1,12 +1,11 @@
 import React from "react";
-import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import AddTask from "./addTask";
 import Todo from "./todo";
-import { v4 as uuidv4 } from "uuid";
 import ToDoList from "./ToDoList";
-import Main from "../pages/main";
+import { add } from "../slice/slice";
 
-const ToDoCRUD = ({ list, addList }) => {
+const ToDoCRUD = () => {
   // const [list, setList] = useState([
   //   {
   //     id: 10,
@@ -23,12 +22,18 @@ const ToDoCRUD = ({ list, addList }) => {
   // const addList = (todo) => {
   //   setList((list) => [todo, ...list]);
   // };
+  const dispatch = useDispatch();
+  const list = useSelector((state) => state.addTask);
+
+  const addList = (todo) => {
+    dispatch(add(todo));
+  };
 
   return (
     <>
       <AddTask addList={addList} />
-      <Todo list={list} />
-      <ToDoList list={list} />
+      <Todo />
+      <ToDoList />
     </>
   );
 };
