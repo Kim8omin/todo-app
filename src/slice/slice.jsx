@@ -17,6 +17,8 @@ const addSlice = createSlice({
         category: newTodo.category,
         todo: newTodo.todo,
       });
+
+      state.todos.reverse();
     },
   },
 });

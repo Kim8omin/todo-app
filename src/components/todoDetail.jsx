@@ -1,11 +1,16 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
+import { useSelector } from "react-redux";
 
-const TodoDetail = ({ list }) => {
+const TodoDetail = () => {
   const { id } = useParams();
 
+  const list = useSelector((state) => state.addTask.todos);
+  console.log(list);
+
   const selectedItem = list.find((item) => String(item.id) === String(id));
+
   console.log("id는 이거다", id);
   console.log("list는 이거다", list);
   console.log("selectitem은 이거다", selectedItem);
