@@ -32,12 +32,13 @@ const Header = ({ onClickRef }) => {
     <>
       <HeaderLayer>
         <MediaQuery minWidth={769}>
-          <Title onClick={handleLogoClick}>My task</Title>
+          <Title onClick={handleLogoClick}>My Task</Title>
           <MenuLayer>
             <span
-              onClick={() => {
-                clickHeaderButton("mainSection", 99);
-              }}
+              onClick={onClickRef}
+              // onClick={() => {
+              //   clickHeaderButton("mainSection", 99);
+              // }}
             >
               Home
             </span>
@@ -73,10 +74,10 @@ const Header = ({ onClickRef }) => {
               onClick={onToggle}
               width="25px"
             />
-            <div>
+            <span>
               <h2>My Task</h2>
-            </div>
-            <div />
+            </span>
+            <div id="empty-space"></div>
           </MobileLayer>
           {toggle && <Overlay onClick={onToggle} />}
           {toggle && (
@@ -182,12 +183,14 @@ const MobileLayer = styled.div`
     padding: 20px;
   }
 
-  h2 {
-    margin: 0 auto;
-    padding: 0;
-    color: white;
+  span h2 {
+    color: #f2e3d9;
     font-size: 1.1rem;
     text-align: center;
+  }
+
+  #empty-space {
+    width: 60px;
   }
 `;
 

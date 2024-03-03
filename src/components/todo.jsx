@@ -1,29 +1,62 @@
 import { useSelector } from "react-redux";
 import styled from "styled-components";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
+import { useState, useEffect } from "react";
+import arrow from "../assets/arrow.gif";
 
 function Todo() {
   const recentList = useSelector((state) => state.addTask.todos);
+  const [emptyList, setEmptyList] = useState(false);
+  console.log(recentList);
+
+  useEffect(() => {
+    if (recentList.length === 0) {
+      setEmptyList(true);
+    } else if (recentList.length >= 1) {
+      setEmptyList(false);
+    }
+  }, [recentList]);
 
   return (
-    <div id="myTodaySection">
-      <ScrollAnimationContainer>
-        <ToDoLayer>
-          <TextLayer>
-            <h2>{recentList?.[0]?.title}</h2>
-            <hr />
-            <p>{recentList?.[0]?.date}</p>
-            <p>{recentList?.[0]?.category}</p>
-            <p>{recentList?.[0]?.todo}</p>
-          </TextLayer>
-          <Img src={recentList?.[0]?.file} alt="img" />
-        </ToDoLayer>
-      </ScrollAnimationContainer>
-    </div>
+    <>
+      {emptyList && (
+        <ScrollAnimationContainer>
+          <EmptyList>
+            <img src={arrow} alt="arrow" />
+
+            <p> Please fill out the form above</p>
+          </EmptyList>
+        </ScrollAnimationContainer>
+      )}
+      {!emptyList && (
+        <div id="myTodaySection">
+          <ScrollAnimationContainer>
+            <ToDoLayer>
+              <TextLayer>
+                <h2>{recentList?.[0]?.title}</h2>
+                <hr />
+                <p>{recentList?.[0]?.date}</p>
+                <p>{recentList?.[0]?.category}</p>
+                <p>{recentList?.[0]?.todo}</p>
+              </TextLayer>
+              <Img src={recentList?.[0]?.file} alt="img" />
+            </ToDoLayer>
+          </ScrollAnimationContainer>
+        </div>
+      )}
+    </>
   );
 }
 
 export default Todo;
+
+const EmptyList = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px;
+  gap: 20px;
+`;
 
 const ToDoLayer = styled.div`
   display: flex;
@@ -44,12 +77,24 @@ const ToDoLayer = styled.div`
 `;
 
 const TextLayer = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-align: center;
   width: 40%;
   margin: 20px;
   line-height: 1.2;
 
   p {
     margin-bottom: 10px;
+  }
+
+  hr {
+    width: 400px;
+    border: none;
+    border-top: 2px solid #c07848;
+    color: #c07848;
+    overflow: visible;
+    height: 5px;
   }
 
   @media (max-width: 768px) {

@@ -10,7 +10,7 @@ const Footer = () => {
         <p>Powered By Kim8omin</p>
       </TitleLayer>
       <MenuLayer>
-        <p>HOME</p>
+        <p>Home</p>
         <p>Add Task</p>
         <p>Recent</p>
         <p>To do List</p>

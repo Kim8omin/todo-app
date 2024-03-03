@@ -47,6 +47,7 @@ const ToDoList = () => {
                   </div>
                 );
               })}
+              {/* //컴포넌트 만든다. (21~47) */}
               <AddButton>
                 <h2
                   onClick={() => {
