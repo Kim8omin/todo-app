@@ -29,20 +29,16 @@ const AddTask = ({ addList }) => {
     category: "",
     todo: "",
   });
-  const [file, setFile] = useState([]);
 
-  //에러처리1
+  const [file, setFile] = useState([]);
+  console.log("업로드 되기 전의 파일", file);
+
+  //handleChange에서 즉석으로 조건검사
   const [toDoerror, setToDoError] = useState("");
   const [categoryError, setCategoryError] = useState("");
   const [fillOut, setFillOut] = useState("");
 
-  
-  //배열로 useRef 선언해주는 것으로 바꾼 부분
-  const errorRef = useRef(new Array(formFieldArray.length));
-  
-  
-  //에러처리2
-    const [error, setError] = useState({
+  const [error, setError] = useState({
     title: "",
     date: "",
     category: "",
@@ -50,7 +46,7 @@ const AddTask = ({ addList }) => {
     file: "",
   });
 
-  
+  const inputRef = useRef([]);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -89,88 +85,15 @@ const AddTask = ({ addList }) => {
     }
   };
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    if (todo.title.trim().length === 0) {
-      setError((prevError) => ({
-        ...prevError,
-        titleError: "please fill in the title",
-      }));
-      formFieldArray[0].current.focus();
-      return;
-    }
-
-    if (todo.title.trim().length >= 3) {
-      setError((prevError) => ({
-        ...prevError,
-        titleError: "",
-      }));
-    }
-
-    if (todo.date.trim().length === 0) {
-      setError((prevError) => ({
-        ...prevError,
-        dateError: "please fill in the date",
-      }));
-      formFieldArray[1].current.focus();
-      return;
-    }
-
-    if (todo.title.trim().length >= 1) {
-      setError((prevError) => ({
-        ...prevError,
-        dateError: "",
-      }));
-    }
-
-    if (todo.category.trim().length === 0 || todo.category === "category") {
-      setError((prevError) => ({
-        ...prevError,
-        categoryError: "please choose one from the category",
-      }));
-      formFieldArray[2].current.focus();
-      return;
-    }
-
-    if (todo.category.trim().length >= 1 && todo.category === !"category") {
-      setError((prevError) => ({
-        ...prevError,
-        categoryError: "",
-      }));
-    }
-
-    if (todo.todo.trim().length === 0) {
-      setError((prevError) => ({
-        ...prevError,
-        todoError: "please write down the details",
-      }));
-      formFieldArray[3].current.focus();
-      return;
-    }
-
-    if (todo.todo.trim().length >= 1) {
-      setError((prevError) => ({
-        ...prevError,
-        todoError: "",
-      }));
-    }
-
-    if (todo.file.length < 1) {
-      setError((prevError) => ({
-        ...prevError,
-        fileError: "please choose the image file to upload",
-      }));
-      formFieldArray[4].current.focus();
-      return;
-    }
-
-    if (todo.file.length === 1) {
-      setError((prevError) => ({
-        ...prevError,
-        fileError: "",
-      }));
+    for (let i = 0; i < inputRef.current.length; i++) {
+      if (inputRef.current[i].value === "") {
+        alert(inputRef.current[i].name + "는(은) 필수 입력사항입니다.");
+        inputRef.current[i].focus();
+        break;
+      }
     }
 
     addList({ ...todo, file: file });
@@ -188,56 +111,6 @@ const AddTask = ({ addList }) => {
     setFile([]);
   };
 
-  //input이 써지면 에러문구가 없어지는 부분
-  useEffect(() => {
-    if (error.titleError && todo.title.trim().length >= 3) {
-      setError((prevError) => ({
-        ...prevError,
-        titleError: "",
-      }));
-    }
-  }, [error.titleError, todo.title]);
-
-  useEffect(() => {
-    if (error.dateError && todo.date.trim().length >= 1) {
-      setError((prevError) => ({
-        ...prevError,
-        dateError: "",
-      }));
-    }
-  }, [error.dateError, todo.date]);
-
-  useEffect(() => {
-    if (
-      error.categoryError &&
-      todo.category.trim().length >= 1 &&
-      todo.category !== "category"
-    ) {
-      setError((prevError) => ({
-        ...prevError,
-        categoryError: "",
-      }));
-    }
-  }, [error.categoryError, todo.category]);
-
-  useEffect(() => {
-    if (error.todoError && todo.todo.trim().length >= 1) {
-      setError((prevError) => ({
-        ...prevError,
-        todoError: "",
-      }));
-    }
-  }, [error.todoError, todo.todo]);
-
-  useEffect(() => {
-    if (error.fileError && todo.file.length === 1) {
-      setError((prevError) => ({
-        ...prevError,
-        todoError: "",
-      }));
-    }
-  }, [error.fileError, todo.file]);
-
   return (
     <>
       <TaskWrapper id="addTodoSection">
@@ -248,7 +121,7 @@ const AddTask = ({ addList }) => {
         </TitleLayer>
         <FormLayer>
           <form onSubmit={handleSubmit} className="form">
-            {formFieldArray.map((field, index) => {
+            {formFieldArray.map((field) => {
               switch (field?.tag) {
                 case "input":
                   return (
@@ -259,9 +132,8 @@ const AddTask = ({ addList }) => {
                         placeholder={field?.placeholder}
                         value={todo?.[field?.name]}
                         onChange={handleChange}
-                        ref={(element) => {
-                          errorRef.current[index] = element;
-                        }}
+                        ref={(el) => (inputRef.current[0] = el)}
+                        //ref={inputTitle}
                       />
                       {Object.values(error).some((value) => value) && (
                         <p key={`${field.name}-error`} style={{ color: "red" }}>
@@ -278,9 +150,8 @@ const AddTask = ({ addList }) => {
                         name={field?.name}
                         placeholder={field?.placeholder}
                         onChange={handleChange}
-                        ref={(element) => {
-                          errorRef.current[index] = element;
-                        }}
+                        ref={(el) => (inputRef.current[1] = el)}
+                        //ref={inputTodo}
                       />
                       {toDoerror && (
                         <p key={`${field.name}-error`}>{toDoerror}</p>
@@ -299,9 +170,8 @@ const AddTask = ({ addList }) => {
                         type={field?.type}
                         name={field?.name}
                         onChange={handleChange}
-                        ref={(element) => {
-                          errorRef.current[index] = element;
-                        }}
+                        ref={(el) => (inputRef.current[2] = el)}
+                        //ref={inputFile}
                       />
                       {Object.values(error).some((value) => value) && (
                         <p key={`${field.name}-error`} style={{ color: "red" }}>
@@ -317,9 +187,8 @@ const AddTask = ({ addList }) => {
                         name={field?.name}
                         value={todo?.[field?.name]}
                         onChange={handleChange}
-                        ref={(element) => {
-                          errorRef.current[index] = element;
-                        }}
+                        ref={(el) => (inputRef.current[3] = el)}
+                        //ref={inputCategory}
                       >
                         {field?.options?.map((option) => {
                           return (
@@ -343,65 +212,12 @@ const AddTask = ({ addList }) => {
                   return null;
               }
             })}
-          
 
-export default AddTask;
-
-const TaskWrapper = styled.div`
-margin-top: -5px;
-width: 100%
-max-height: 545px;
-background-color: #F1E3D9;
-text-align: center;
-padding: 50px;
-
-`;
-
-const TitleLayer = styled.div`
-  h2 {
-    font-size: 32px;
-    font-weight: 500;
-    letter-spacing: 0.5px;
-  }
-
-  hr {
-    width: 300px;
-    border: none;
-    border-top: 2px solid #c07848;
-    color: #c07848;
-    overflow: visible;
-    text-align: center;
-    height: 5px;
-  }
-`;
-
-const FormLayer = styled.div`
-  form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
-    margin: 20px;
-
-    input,
-    select,
-    textarea {
-      width: 85%;
-      height: 45px;
-      border: 1px solid #d4d7e5;
-      border-radius: 5px;
-    }
-
-    button {
-      background-color: #c07848;
-      border: 1px solid #c07848;
-      color: white;
-      width: 85%;
-      height: 45px;
-      font-size: 16.5px;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-  }
-`;
+            {fillOut && <p>{fillOut}</p>}
+            <button type="submit">SUBMIT</button>
+          </form>
+        </FormLayer>
+      </TaskWrapper>
+    </>
+  );
+};
