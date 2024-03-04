@@ -29,29 +29,28 @@ const AddTask = ({ addList }) => {
     category: "",
     todo: "",
   });
-
   const [file, setFile] = useState([]);
-  console.log("업로드 되기 전의 파일", file);
 
   //에러처리1
   const [toDoerror, setToDoError] = useState("");
   const [categoryError, setCategoryError] = useState("");
   const [fillOut, setFillOut] = useState("");
 
+  
+  //배열로 useRef 선언해주는 것으로 바꾼 부분
+  const errorRef = useRef(new Array(formFieldArray.length));
+  
+  
   //에러처리2
-  const inputTitle = useRef(null);
-  const inputDate = useRef(null);
-  const inputFile = useRef(null);
-  const inputCategory = useRef(null);
-  const inputTodo = useRef(null);
-
-  const [error, setError] = useState({
+    const [error, setError] = useState({
     title: "",
     date: "",
     category: "",
     todo: "",
     file: "",
   });
+
+  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -90,87 +89,87 @@ const AddTask = ({ addList }) => {
     }
   };
 
+
   const handleSubmit = (event) => {
     event.preventDefault();
 
     if (todo.title.trim().length === 0) {
       setError((prevError) => ({
         ...prevError,
-        title: "please fill in the title",
+        titleError: "please fill in the title",
       }));
-      inputTitle.current.focus();
-
+      formFieldArray[0].current.focus();
       return;
     }
 
     if (todo.title.trim().length >= 3) {
       setError((prevError) => ({
         ...prevError,
-        title: "",
+        titleError: "",
       }));
     }
 
     if (todo.date.trim().length === 0) {
       setError((prevError) => ({
         ...prevError,
-        date: "please fill in the date",
+        dateError: "please fill in the date",
       }));
-      inputDate.current.focus();
+      formFieldArray[1].current.focus();
       return;
     }
 
     if (todo.title.trim().length >= 1) {
       setError((prevError) => ({
         ...prevError,
-        date: "",
+        dateError: "",
       }));
     }
 
     if (todo.category.trim().length === 0 || todo.category === "category") {
       setError((prevError) => ({
         ...prevError,
-        category: "please choose one from the category",
+        categoryError: "please choose one from the category",
       }));
-      inputCategory.current.focus();
+      formFieldArray[2].current.focus();
       return;
     }
 
     if (todo.category.trim().length >= 1 && todo.category === !"category") {
       setError((prevError) => ({
         ...prevError,
-        category: "",
+        categoryError: "",
       }));
     }
 
     if (todo.todo.trim().length === 0) {
       setError((prevError) => ({
         ...prevError,
-        todo: "please write down the details",
+        todoError: "please write down the details",
       }));
-      inputTodo.current.focus();
+      formFieldArray[3].current.focus();
       return;
     }
 
     if (todo.todo.trim().length >= 1) {
       setError((prevError) => ({
         ...prevError,
-        todo: "",
+        todoError: "",
       }));
     }
 
-    if (file.length === 0) {
+    if (todo.file.length < 1) {
       setError((prevError) => ({
         ...prevError,
-        file: "please choose the image file to upload",
+        fileError: "please choose the image file to upload",
       }));
-      inputFile.current.focus();
+      formFieldArray[4].current.focus();
       return;
     }
 
-    if (file.length >= 1) {
+    if (todo.file.length === 1) {
       setError((prevError) => ({
         ...prevError,
-        file: "",
+        fileError: "",
       }));
     }
 
@@ -191,53 +190,53 @@ const AddTask = ({ addList }) => {
 
   //input이 써지면 에러문구가 없어지는 부분
   useEffect(() => {
-    if (error.title && todo.title.trim().length >= 3) {
+    if (error.titleError && todo.title.trim().length >= 3) {
       setError((prevError) => ({
         ...prevError,
-        title: "",
+        titleError: "",
       }));
     }
-  }, [error.title, todo.title]);
+  }, [error.titleError, todo.title]);
 
   useEffect(() => {
-    if (error.date && todo.date.trim().length >= 1) {
+    if (error.dateError && todo.date.trim().length >= 1) {
       setError((prevError) => ({
         ...prevError,
-        date: "",
+        dateError: "",
       }));
     }
-  }, [error.date, todo.date]);
+  }, [error.dateError, todo.date]);
 
   useEffect(() => {
     if (
-      error.category &&
+      error.categoryError &&
       todo.category.trim().length >= 1 &&
       todo.category !== "category"
     ) {
       setError((prevError) => ({
         ...prevError,
-        category: "",
+        categoryError: "",
       }));
     }
-  }, [error.category, todo.category]);
+  }, [error.categoryError, todo.category]);
 
   useEffect(() => {
-    if (error.todo && todo.todo.trim().length >= 1) {
+    if (error.todoError && todo.todo.trim().length >= 1) {
       setError((prevError) => ({
         ...prevError,
-        todo: "",
+        todoError: "",
       }));
     }
-  }, [error.todo, todo.todo]);
+  }, [error.todoError, todo.todo]);
 
   useEffect(() => {
-    if (error.file && file.length >= 1) {
+    if (error.fileError && todo.file.length === 1) {
       setError((prevError) => ({
         ...prevError,
-        file: "",
+        todoError: "",
       }));
     }
-  }, [error.file, file]);
+  }, [error.fileError, todo.file]);
 
   return (
     <>
@@ -260,7 +259,9 @@ const AddTask = ({ addList }) => {
                         placeholder={field?.placeholder}
                         value={todo?.[field?.name]}
                         onChange={handleChange}
-                        ref={inputTitle}
+                        ref={(element) => {
+                          errorRef.current[index] = element;
+                        }}
                       />
                       {Object.values(error).some((value) => value) && (
                         <p key={`${field.name}-error`} style={{ color: "red" }}>
@@ -277,7 +278,9 @@ const AddTask = ({ addList }) => {
                         name={field?.name}
                         placeholder={field?.placeholder}
                         onChange={handleChange}
-                        ref={inputTodo}
+                        ref={(element) => {
+                          errorRef.current[index] = element;
+                        }}
                       />
                       {toDoerror && (
                         <p key={`${field.name}-error`}>{toDoerror}</p>
@@ -296,7 +299,9 @@ const AddTask = ({ addList }) => {
                         type={field?.type}
                         name={field?.name}
                         onChange={handleChange}
-                        ref={inputFile}
+                        ref={(element) => {
+                          errorRef.current[index] = element;
+                        }}
                       />
                       {Object.values(error).some((value) => value) && (
                         <p key={`${field.name}-error`} style={{ color: "red" }}>
@@ -312,7 +317,9 @@ const AddTask = ({ addList }) => {
                         name={field?.name}
                         value={todo?.[field?.name]}
                         onChange={handleChange}
-                        ref={inputCategory}
+                        ref={(element) => {
+                          errorRef.current[index] = element;
+                        }}
                       >
                         {field?.options?.map((option) => {
                           return (
@@ -336,15 +343,7 @@ const AddTask = ({ addList }) => {
                   return null;
               }
             })}
-
-            {fillOut && <p>{fillOut}</p>}
-            <button type="submit">SUBMIT</button>
-          </form>
-        </FormLayer>
-      </TaskWrapper>
-    </>
-  );
-};
+          
 
 export default AddTask;
 
