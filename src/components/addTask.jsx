@@ -180,13 +180,13 @@ const AddTask = ({ addList }) => {
       console.log("Field:", inputRef.current[i]);
       const field = inputRef.current[i];
       if (field.value === "") {
-        alert(field.name + "는(은) 필수 입력사항입니다.");
+        alert(field.name + "Please fill out all input fields");
         field.focus();
         return;
       }
       if (field.tagName.toLowerCase() === "select") {
         if (field.value === "category") {
-          alert(field.name + "는(은) 필수 입력사항입니다.");
+          alert(field.name + "Please fill out all input fields");
           field.focus();
           return;
         }
