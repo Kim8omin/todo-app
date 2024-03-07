@@ -5,20 +5,25 @@ import ToDoCRUD from "../components/ToDoCRUD";
 import Footer from "../components/footer";
 
 const Main = () => {
-  const testRef = useRef();
+  const testRef = useRef(null);
+  const testRef2 = useRef(null);
 
   const onClickRef = (section) => {
     if (section === "banner") {
       testRef.current.scrollIntoView({ behavior: "smooth" });
+      console.log(testRef.current);
+      return;
     }
-    console.log(testRef.current);
+    if (section === "add")
+      testRef2.current.scrollIntoView({ behavior: "smooth" });
+    console.log(testRef2.current);
   };
 
   return (
     <div>
       <Header onClickRef={onClickRef} />
       <Banner testRef={testRef} />
-      <ToDoCRUD />
+      <ToDoCRUD testRef2={testRef2} />
       <Footer />
     </div>
   );

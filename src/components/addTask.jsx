@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 const formFieldArray = [
@@ -21,7 +21,7 @@ const formFieldArray = [
   { type: "file", name: "file", tag: "file" },
 ];
 
-const AddTask = ({ addList }) => {
+const AddTask = ({ addList, testRef2 }) => {
   const [todo, setTodo] = useState({
     id: uuidv4(),
     title: "",
@@ -180,13 +180,13 @@ const AddTask = ({ addList }) => {
       console.log("Field:", inputRef.current[i]);
       const field = inputRef.current[i];
       if (field.value === "") {
-        alert(field.name + "Please fill out all input fields");
+        alert(`Please fill out ${field.name}`);
         field.focus();
         return;
       }
       if (field.tagName.toLowerCase() === "select") {
         if (field.value === "category") {
-          alert(field.name + "Please fill out all input fields");
+          alert(`Please fill out ${field.name}`);
           field.focus();
           return;
         }
@@ -260,7 +260,7 @@ const AddTask = ({ addList }) => {
 
   return (
     <>
-      <TaskWrapper id="addTodoSection">
+      <TaskWrapper id="addTodoSection" ref={testRef2}>
         <TitleLayer>
           <h2>ADD TASK</h2>
           <hr />

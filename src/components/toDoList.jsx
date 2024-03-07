@@ -4,10 +4,13 @@ import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 import CardComponent from "./CardComponent";
 import { useState, useEffect } from "react";
 import plus from "../assets/plus.png";
+import { Hr } from "../styles/Hr";
+import UseMoveToSection from "../util/UseMoveToSection";
 
 const ToDoList = () => {
   const recentList = useSelector((state) => state.addTask.todos);
   const [emptyList, setEmptyList] = useState(true);
+  const { clickHeaderButton } = UseMoveToSection();
 
   useEffect(() => {
     if (recentList.length === 0) {
@@ -23,7 +26,7 @@ const ToDoList = () => {
         <ScrollAnimationContainer>
           <CardLayer>
             <h2>To do List</h2>
-            <hr />
+            <Hr />
             <CardComponent />
           </CardLayer>
         </ScrollAnimationContainer>
@@ -32,19 +35,17 @@ const ToDoList = () => {
         <ScrollAnimationContainer>
           <CardLayer>
             <h2>To do List</h2>
-            <hr />
+            <Hr />
             <AddButton>
-              <img src={plus} alt="plus" style={{ width: "80px" }} />
-              <h2
+              <img
+                src={plus}
+                alt="plus"
+                style={{ width: "80px" }}
                 onClick={() => {
-                  window.scrollTo({
-                    top: 550,
-                    behavior: "smooth",
-                  });
+                  clickHeaderButton("addTodoSection");
                 }}
-              >
-                Adding new tasks
-              </h2>
+              />
+              <h2>Adding new tasks</h2>
             </AddButton>
           </CardLayer>
         </ScrollAnimationContainer>

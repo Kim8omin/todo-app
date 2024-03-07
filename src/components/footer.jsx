@@ -1,7 +1,10 @@
 import React from "react";
 import styled from "styled-components";
+import UseMoveToSection from "../util/UseMoveToSection";
 
 const Footer = () => {
+  const { clickHeaderButton } = UseMoveToSection();
+
   return (
     <FooterLayer>
       <TitleLayer>
@@ -10,10 +13,34 @@ const Footer = () => {
         <p>Powered By Kim8omin</p>
       </TitleLayer>
       <MenuLayer>
-        <p>Home</p>
-        <p>Add Task</p>
-        <p>Recent</p>
-        <p>To do List</p>
+        <p
+          onClick={() => {
+            clickHeaderButton("mainSection");
+          }}
+        >
+          Home
+        </p>
+        <p
+          onClick={() => {
+            clickHeaderButton("addTodoSection");
+          }}
+        >
+          Add Task
+        </p>
+        <p
+          onClick={() => {
+            clickHeaderButton("myTodaySection");
+          }}
+        >
+          Recent
+        </p>
+        <p
+          onClick={() => {
+            clickHeaderButton("myTodoSection");
+          }}
+        >
+          To do List
+        </p>
       </MenuLayer>
     </FooterLayer>
   );

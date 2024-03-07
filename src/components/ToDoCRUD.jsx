@@ -5,7 +5,7 @@ import Todo from "./todo";
 import ToDoList from "./ToDoList";
 import { addActions } from "../slice/slice";
 
-const ToDoCRUD = () => {
+const ToDoCRUD = ({ testRef2 }) => {
   const dispatch = useDispatch();
 
   const addList = (todo) => {
@@ -14,7 +14,7 @@ const ToDoCRUD = () => {
 
   return (
     <>
-      <AddTask addList={addList} />
+      <AddTask addList={addList} testRef2={testRef2} />
       <Todo />
       <ToDoList />
     </>

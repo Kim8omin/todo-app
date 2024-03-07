@@ -3,9 +3,11 @@ import styled from "styled-components";
 import MediaQuery from "react-responsive";
 import hamburger from "../assets/hamburger.png";
 import cancel from "../assets/cancel.png";
+import UseMoveToSection from "../util/UseMoveToSection";
 
 const Header = ({ onClickRef }) => {
   const [toggle, setToggle] = useState(false);
+  const { clickHeaderButton } = UseMoveToSection();
 
   const onToggle = () => {
     setToggle(!toggle);
@@ -15,19 +17,6 @@ const Header = ({ onClickRef }) => {
     window.location.href = "/";
   };
 
-  const clickHeaderButton = (id, offset = 80) => {
-    const section = document.getElementById(id);
-
-    if (section) {
-      const sectionPosition = section.offsetTop;
-      window.scrollTo({
-        top: sectionPosition - offset,
-        behavior: "smooth",
-      });
-      console.log(sectionPosition);
-    }
-  };
-
   return (
     <>
       <HeaderLayer>
@@ -35,10 +24,9 @@ const Header = ({ onClickRef }) => {
           <Title onClick={handleLogoClick}>My Task</Title>
           <MenuLayer>
             <span
-              onClick={onClickRef}
-              // onClick={() => {
-              //   clickHeaderButton("mainSection", 99);
-              // }}
+              onClick={() => {
+                clickHeaderButton("mainSection");
+              }}
             >
               Home
             </span>
@@ -90,24 +78,44 @@ const Header = ({ onClickRef }) => {
                 id="cancel"
               />
               <NavWrapped>
-                <span>
-                  <Nav onClick={onToggle}>
+                <span
+                  onClick={() => {
+                    onToggle();
+                    clickHeaderButton("mainSection");
+                  }}
+                >
+                  <Nav>
                     <NavText>Home</NavText>
                   </Nav>
                 </span>
-                <span>
-                  <Nav onClick={onToggle}>
+                <span
+                  onClick={() => {
+                    onToggle();
+                    clickHeaderButton("addTodoSection");
+                  }}
+                >
+                  <Nav>
                     <NavText>Add Task</NavText>
                   </Nav>
                 </span>
 
-                <span>
-                  <Nav onClick={onToggle}>
+                <span
+                  onClick={() => {
+                    onToggle();
+                    clickHeaderButton("myTodaySection");
+                  }}
+                >
+                  <Nav>
                     <NavText>Recent</NavText>
                   </Nav>
                 </span>
-                <span>
-                  <Nav onClick={onToggle}>
+                <span
+                  onClick={() => {
+                    onToggle();
+                    clickHeaderButton("myTodoSection");
+                  }}
+                >
+                  <Nav>
                     <NavText>To do List</NavText>
                   </Nav>
                 </span>

@@ -7,7 +7,6 @@ import arrow from "../assets/arrow.gif";
 function Todo() {
   const recentList = useSelector((state) => state.addTask.todos);
   const [emptyList, setEmptyList] = useState(false);
-  console.log(recentList);
 
   useEffect(() => {
     if (recentList.length === 0) {
@@ -18,7 +17,7 @@ function Todo() {
   }, [recentList]);
 
   return (
-    <>
+    <div id="myTodaySection">
       {emptyList && (
         <ScrollAnimationContainer>
           <EmptyList>
@@ -29,7 +28,7 @@ function Todo() {
         </ScrollAnimationContainer>
       )}
       {!emptyList && (
-        <div id="myTodaySection">
+        <>
           <ScrollAnimationContainer>
             <ToDoLayer>
               <TextLayer>
@@ -42,9 +41,9 @@ function Todo() {
               <Img src={recentList?.[0]?.file} alt="img" />
             </ToDoLayer>
           </ScrollAnimationContainer>
-        </div>
+        </>
       )}
-    </>
+    </div>
   );
 }
 
