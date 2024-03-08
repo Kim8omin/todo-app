@@ -1,5 +1,3 @@
-import React from "react";
-
 const UseMoveToSection = () => {
   const clickHeaderButton = (id, offset = 80) => {
     const section = document.getElementById(id);

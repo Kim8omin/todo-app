@@ -4,7 +4,6 @@ import MediaQuery from "react-responsive";
 import hamburger from "../assets/hamburger.png";
 import cancel from "../assets/cancel.png";
 import UseMoveToSection from "../util/UseMoveToSection";
-import NavigationLink from "../util/NavigationHome";
 
 const Header = ({ onClickRef }) => {
   const [toggle, setToggle] = useState(false);
