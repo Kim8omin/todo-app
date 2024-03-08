@@ -25,8 +25,8 @@ const AddTask = ({ addList }) => {
   const [todo, setTodo] = useState({
     id: uuidv4(),
     title: "",
-    date: "",
-    category: "",
+    date: "yyyy-MM-dd",
+    category: "category",
     todo: "",
   });
 
@@ -200,8 +200,8 @@ const AddTask = ({ addList }) => {
     setTodo({
       id: uuidv4(),
       title: "",
-      date: "",
-      category: "",
+      date: "yyyy-MM-dd",
+      category: "category",
       todo: "",
     });
 

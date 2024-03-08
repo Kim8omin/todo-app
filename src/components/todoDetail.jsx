@@ -11,10 +11,6 @@ const TodoDetail = () => {
 
   const selectedItem = list.find((item) => String(item.id) === String(id));
 
-  console.log("id는 이거다", id);
-  console.log("list는 이거다", list);
-  console.log("selectitem은 이거다", selectedItem);
-
   if (!selectedItem) {
     return (
       <div>
@@ -43,17 +39,23 @@ const TodoDetail = () => {
 export default TodoDetail;
 
 const DetailLayer = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 80px;
   gap: 10px;
   line-height: 12px;
 
+  h2 {
+    max-width: 40%;
+    font-size: 35px;
+    font-weight: 300;
+  }
+
   hr {
-    width: 300px;
+    width: 70%;
     border: none;
     border-top: 2px solid #c07848;
     color: #c07848;
@@ -62,12 +64,7 @@ const DetailLayer = styled.div`
     height: 5px;
   }
 
-  h2 {
-    font-size: 3rem;
-    font-weight: 300;
-  }
-
   img {
-    width: 400px;
+    width: 80%;
   }
 `;
