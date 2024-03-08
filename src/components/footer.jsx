@@ -1,10 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import UseMoveToSection from "../util/UseMoveToSection";
+import StyledLinkComponent from "../util/StyledLink";
 
 const Footer = () => {
-  const { clickHeaderButton } = UseMoveToSection();
-
   return (
     <FooterLayer>
       <TitleLayer>
@@ -13,34 +11,18 @@ const Footer = () => {
         <p>Powered By Kim8omin</p>
       </TitleLayer>
       <MenuLayer>
-        <p
-          onClick={() => {
-            clickHeaderButton("mainSection");
-          }}
-        >
-          Home
-        </p>
-        <p
-          onClick={() => {
-            clickHeaderButton("addTodoSection");
-          }}
-        >
-          Add Task
-        </p>
-        <p
-          onClick={() => {
-            clickHeaderButton("myTodaySection");
-          }}
-        >
-          Recent
-        </p>
-        <p
-          onClick={() => {
-            clickHeaderButton("myTodoSection");
-          }}
-        >
-          To do List
-        </p>
+        <StyledLinkComponent to="/#mainSection" id="mainSection">
+          <p>Home</p>
+        </StyledLinkComponent>
+        <StyledLinkComponent to="/#addTodoSection" id="addTodoSection">
+          <p>Add Task</p>
+        </StyledLinkComponent>
+        <StyledLinkComponent to="/#myTodaySection" id="myTodaySection">
+          <p>Recent</p>
+        </StyledLinkComponent>
+        <StyledLinkComponent to="/#myTodoSection" id="myTodoSection">
+          <p>To do List</p>
+        </StyledLinkComponent>
       </MenuLayer>
     </FooterLayer>
   );
@@ -75,6 +57,7 @@ const MenuLayer = styled.div`
   margin-right: 80px;
 
   p {
+    color: black;
     cursor: pointer;
 
     &: hover {

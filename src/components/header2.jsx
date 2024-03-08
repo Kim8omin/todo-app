@@ -4,7 +4,6 @@ import MediaQuery from "react-responsive";
 import hamburger from "../assets/hamburger.png";
 import cancel from "../assets/cancel.png";
 import UseMoveToSection from "../util/UseMoveToSection";
-import NavigationLink from "../util/NavigationHome";
 import { HashLink as Link } from "react-router-hash-link";
 
 const DetailHeader = ({ onClickRef }) => {
@@ -38,41 +37,41 @@ const DetailHeader = ({ onClickRef }) => {
         <MediaQuery minWidth={769}>
           <Title onClick={handleLogoClick}>My Task</Title>
           <MenuLayer>
-            <Link
+            <StyledLink
               to="/#mainSection"
               scroll={() => {
                 clickHeaderButton("mainSection");
               }}
             >
               Home
-            </Link>
+            </StyledLink>
 
-            <Link
+            <StyledLink
               to="/#addTodoSection"
               scroll={() => {
                 clickHeaderButton("addTodoSection");
               }}
             >
               Add Task
-            </Link>
+            </StyledLink>
 
-            <Link
+            <StyledLink
               to="/#myTodaySection"
               scroll={() => {
                 clickHeaderButton("myTodaySection");
               }}
             >
               Recent
-            </Link>
+            </StyledLink>
 
-            <Link
+            <StyledLink
               to="/#myTodoSection"
               scroll={() => {
                 clickHeaderButton("myTodoSection");
               }}
             >
               To do List
-            </Link>
+            </StyledLink>
           </MenuLayer>
         </MediaQuery>
         <MediaQuery maxWidth={768}>
@@ -99,47 +98,47 @@ const DetailHeader = ({ onClickRef }) => {
                 id="cancel"
               />
               <NavWrapped>
-                <span
-                  onClick={() => {
-                    onToggle();
+                <StyledLink
+                  to="/#mainSection"
+                  scroll={() => {
                     clickHeaderButton("mainSection");
                   }}
                 >
                   <Nav>
                     <NavText>Home</NavText>
                   </Nav>
-                </span>
-                <span
-                  onClick={() => {
-                    onToggle();
+                </StyledLink>
+                <StyledLink
+                  to="/#addTodoSection"
+                  scroll={() => {
                     clickHeaderButton("addTodoSection");
                   }}
                 >
                   <Nav>
                     <NavText>Add Task</NavText>
                   </Nav>
-                </span>
+                </StyledLink>
 
-                <span
-                  onClick={() => {
-                    onToggle();
+                <StyledLink
+                  to="/#myTodaySection"
+                  scroll={() => {
                     clickHeaderButton("myTodaySection");
                   }}
                 >
                   <Nav>
                     <NavText>Recent</NavText>
                   </Nav>
-                </span>
-                <span
-                  onClick={() => {
-                    onToggle();
+                </StyledLink>
+                <StyledLink
+                  to="/#myTodoSection"
+                  scroll={() => {
                     clickHeaderButton("myTodoSection");
                   }}
                 >
                   <Nav>
                     <NavText>To do List</NavText>
                   </Nav>
-                </span>
+                </StyledLink>
               </NavWrapped>
             </ToggleLayer>
           )}
@@ -191,11 +190,14 @@ const MenuLayer = styled.div`
   color: #f2e3d9;
   letter-spacing: 0.5px;
   cursor: pointer;
+`;
 
-  span {
-    &:hover {
-      font-weight: bold;
-    }
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: #f2e3d9;
+
+  &:hover {
+    font-weight: bold;
   }
 `;
 
