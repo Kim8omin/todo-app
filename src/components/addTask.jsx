@@ -21,7 +21,7 @@ const formFieldArray = [
   { type: "file", name: "file", tag: "file" },
 ];
 
-const AddTask = ({ addList, testRef2 }) => {
+const AddTask = ({ addList }) => {
   const [todo, setTodo] = useState({
     id: uuidv4(),
     title: "",
@@ -260,7 +260,7 @@ const AddTask = ({ addList, testRef2 }) => {
 
   return (
     <>
-      <TaskWrapper id="addTodoSection" ref={testRef2}>
+      <TaskWrapper id="addTodoSection">
         <TitleLayer>
           <h2>ADD TASK</h2>
           <hr />

@@ -5,8 +5,9 @@ import hamburger from "../assets/hamburger.png";
 import cancel from "../assets/cancel.png";
 import UseMoveToSection from "../util/UseMoveToSection";
 import NavigationLink from "../util/NavigationHome";
+import { HashLink as Link } from "react-router-hash-link";
 
-const Header = ({ onClickRef }) => {
+const DetailHeader = ({ onClickRef }) => {
   const [toggle, setToggle] = useState(false);
   const { clickHeaderButton } = UseMoveToSection();
 
@@ -18,46 +19,60 @@ const Header = ({ onClickRef }) => {
     window.location.href = "/";
   };
 
+  //   const clickHeaderButton = (id, offset = 80) => {
+  //     const section = document.getElementById(id);
+
+  //     if (section) {
+  //       const sectionPosition = section.offsetTop;
+  //       window.scrollTo({
+  //         top: sectionPosition - offset,
+  //         behavior: "smooth",
+  //       });
+  //       console.log(sectionPosition);
+  //     }
+  //   };
+
   return (
     <>
       <HeaderLayer>
         <MediaQuery minWidth={769}>
           <Title onClick={handleLogoClick}>My Task</Title>
           <MenuLayer>
-            {/* <NavigationLink to="/" id="mainSection"> */}
-            <span
-              onClick={() => {
+            <Link
+              to="/#mainSection"
+              scroll={() => {
                 clickHeaderButton("mainSection");
               }}
             >
               Home
-            </span>
+            </Link>
 
-            {/* </NavigationLink> */}
-            {/* <NavigationLink to="/" id="addTodoSection"> */}
-            <span
-              onClick={() => {
+            <Link
+              to="/#addTodoSection"
+              scroll={() => {
                 clickHeaderButton("addTodoSection");
               }}
             >
               Add Task
-            </span>
+            </Link>
 
-            {/* </NavigationLink> */}
-            <span
-              onClick={() => {
+            <Link
+              to="/#myTodaySection"
+              scroll={() => {
                 clickHeaderButton("myTodaySection");
               }}
             >
               Recent
-            </span>
-            <span
-              onClick={() => {
+            </Link>
+
+            <Link
+              to="/#myTodoSection"
+              scroll={() => {
                 clickHeaderButton("myTodoSection");
               }}
             >
               To do List
-            </span>
+            </Link>
           </MenuLayer>
         </MediaQuery>
         <MediaQuery maxWidth={768}>
@@ -134,7 +149,7 @@ const Header = ({ onClickRef }) => {
   );
 };
 
-export default Header;
+export default DetailHeader;
 
 const HeaderLayer = styled.div`
   width: 100%;

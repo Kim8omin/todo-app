@@ -18,7 +18,10 @@ const TodoDetail = () => {
   if (!selectedItem) {
     return (
       <div>
-        <p>Todo not found</p>
+        <p>
+          Todo not found : if you refresh the page the data is gone :/.
+          restoring is coming soon.
+        </p>
       </div>
     );
   }
@@ -45,7 +48,7 @@ const DetailLayer = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 30px;
+  padding: 80px;
   gap: 10px;
   line-height: 12px;
 

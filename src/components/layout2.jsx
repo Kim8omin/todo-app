@@ -1,18 +1,18 @@
 import React from "react";
-import Header from "./header";
 import Footer from "./footer";
+import DetailHeader from "./header2";
 
-const Layout = ({ children }) => {
+const DetailLayout = ({ children }) => {
   const handleLogoClick = () => {
     window.location.href = "/";
   };
   return (
     <div>
-      <Header logoClick={handleLogoClick} />
+      <DetailHeader logoClick={handleLogoClick} />
       {children}
       <Footer />
     </div>
   );
 };
 
-export default Layout;
+export default DetailLayout;

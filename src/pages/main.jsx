@@ -21,10 +21,8 @@ const Main = () => {
 
   return (
     <div>
-      <Header onClickRef={onClickRef} />
       <Banner testRef={testRef} />
       <ToDoCRUD testRef2={testRef2} />
-      <Footer />
     </div>
   );
 };
