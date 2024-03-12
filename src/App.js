@@ -20,9 +20,9 @@ function App() {
         <Route
           path="/todo/:id"
           element={
-            <DetailLayout>
+            <Layout>
               <TodoDetail />
-            </DetailLayout>
+            </Layout>
           }
         />
       </Routes>

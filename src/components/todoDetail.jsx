@@ -1,10 +1,13 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 
 const TodoDetail = () => {
   const { id } = useParams();
+  const location = useLocation();
+
+  console.log("useLocation:", location);
 
   const list = useSelector((state) => state.addTask.todos);
   console.log(list);
@@ -52,6 +55,8 @@ const DetailLayer = styled.div`
     max-width: 40%;
     font-size: 35px;
     font-weight: 300;
+    overflow-wrap: break-word;
+    line-height: 12px;
   }
 
   hr {

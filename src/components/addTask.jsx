@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
@@ -11,7 +11,7 @@ const formFieldArray = [
     placeholder: "Category",
     tag: "select",
     options: [
-      { value: "category", title: "category" },
+      { value: "", title: "카테고리를 선택해주세요" },
       { value: "study", title: "study" },
       { value: "work", title: "work" },
       { value: "diary", title: "diary" },
@@ -26,24 +26,24 @@ const AddTask = ({ addList }) => {
     id: uuidv4(),
     title: "",
     date: "yyyy-MM-dd",
-    category: "category",
+    category: "",
     todo: "",
   });
 
   const [file, setFile] = useState([]);
   console.log("업로드 되기 전의 파일", file);
 
+  useEffect(() => {
+    if (inputRef.current[0]) {
+      inputRef.current[0]?.focus();
+    }
+    console.log(inputRef.current[0]);
+  }, []);
+
   //handleChange에서 즉석으로 조건검사
   const [toDoerror, setToDoError] = useState("");
   const [categoryError, setCategoryError] = useState("");
   const [fillOut, setFillOut] = useState("");
-
-  //handleSubmit 되기 전에 비었으면 검사
-  // const inputTitle = useRef(null);
-  // const inputDate = useRef(null);
-  // const inputFile = useRef(null);
-  // const inputCategory = useRef(null);
-  // const inputTodo = useRef(null);
 
   const [error, setError] = useState({
     title: "",
@@ -93,103 +93,16 @@ const AddTask = ({ addList }) => {
   };
 
   const handleSubmit = (event) => {
-    // if (todo.title.trim().length === 0) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     title: "please fill in the title",
-    //   }));
-    //   //inputTitle.current.focus();
-
-    //   return;
-    // }
-
-    // if (todo.title.trim().length >= 1) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     title: "",
-    //   }));
-    // }
-
-    // if (todo.date.trim().length === 0) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     date: "please fill in the date",
-    //   }));
-    //   //inputDate.current.focus();
-    //   return;
-    // }
-
-    // if (todo.date.trim().length >= 1) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     date: "",
-    //   }));
-    // }
-    // if (todo.category.trim().length === 0 || todo.category === "category") {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     category: "please choose one from the category",
-    //   }));
-    //   //inputCategory.current.focus();
-    //   return;
-    // }
-
-    // if (todo.category.trim().length >= 1 && todo.category === !"category") {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     category: "",
-    //   }));
-    // }
-
-    // if (todo.todo.trim().length === 0) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     todo: "please write down the details",
-    //   }));
-    //   //inputTodo.current.focus();
-    //   return;
-    // }
-
-    // if (todo.todo.trim().length >= 1) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     todo: "",
-    //   }));
-    // }
-
-    // if (file.length === 0) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     file: "please choose the image file to upload",
-    //   }));
-    //   //inputFile.current.focus();
-    //   return;
-    // }
-
-    // if (file.length >= 1) {
-    //   setError((prevError) => ({
-    //     ...prevError,
-    //     file: "",
-    //   }));
-    // }
-
     event.preventDefault();
     console.log("Refs:", inputRef.current);
 
     for (let i = 0; i < inputRef.current.length; i++) {
       console.log("Field:", inputRef.current[i]);
       const field = inputRef.current[i];
-      if (field.value === "") {
+      if (field.value.trim() === "") {
         alert(`Please fill out ${field.name}`);
         field.focus();
         return;
-      }
-      if (field.tagName.toLowerCase() === "select") {
-        if (field.value === "category") {
-          alert(`Please fill out ${field.name}`);
-          field.focus();
-          return;
-        }
       }
     }
 

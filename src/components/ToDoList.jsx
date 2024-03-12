@@ -2,40 +2,28 @@ import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
 import CardComponent from "./CardComponent";
-import { useState, useEffect } from "react";
 import plus from "../assets/plus.png";
 import { Hr } from "../styles/Hr";
 import UseMoveToSection from "../util/UseMoveToSection";
+import { Link } from "react-router-dom";
 
 const ToDoList = () => {
   const recentList = useSelector((state) => state.addTask.todos);
-  const [emptyList, setEmptyList] = useState(true);
   const { clickHeaderButton } = UseMoveToSection();
-
-  useEffect(() => {
-    if (recentList.length === 0) {
-      setEmptyList(false);
-    } else if (recentList.length >= 1) {
-      setEmptyList(true);
-    }
-  }, [recentList]);
 
   return (
     <div id="myTodoSection">
-      {emptyList && (
-        <ScrollAnimationContainer>
-          <CardLayer>
-            <h2>To do List</h2>
-            <Hr />
-            <CardComponent />
-          </CardLayer>
-        </ScrollAnimationContainer>
-      )}
-      {!emptyList && (
-        <ScrollAnimationContainer>
-          <CardLayer>
-            <h2>To do List</h2>
-            <Hr />
+      <ScrollAnimationContainer>
+        <CardLayer>
+          <h2>To do List</h2>
+          <Hr />
+          {recentList.length > 0 ? (
+            <CardList>
+              {recentList?.map((todo) => {
+                return <CardComponent todo={todo} />;
+              })}
+            </CardList>
+          ) : (
             <AddButton>
               <img
                 src={plus}
@@ -47,9 +35,9 @@ const ToDoList = () => {
               />
               <h2>Adding new tasks</h2>
             </AddButton>
-          </CardLayer>
-        </ScrollAnimationContainer>
-      )}
+          )}
+        </CardLayer>
+      </ScrollAnimationContainer>
     </div>
   );
 };
@@ -91,5 +79,60 @@ const AddButton = styled.div`
   h2 {
     font-size: 18.5px;
     text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
+  }
+`;
+
+const CardList = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-item: center;
+  gap: 50px;
+`;
+
+export const TaskCard = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 250px;
+  height: 400px;
+
+  h3 {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 200px;
+    font-size: 16px;
+  }
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+  }
+
+  p {
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 100px;
+    max-height: 100px;
+    font-size: 14px;
+  }
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: black;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0px;
+
+  &:hover {
+    color: grey;
   }
 `;

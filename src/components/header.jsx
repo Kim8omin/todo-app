@@ -6,11 +6,11 @@ import cancel from "../assets/cancel.png";
 import UseMoveToSection from "../util/UseMoveToSection";
 
 const Header = ({ onClickRef }) => {
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState("");
   const { clickHeaderButton } = UseMoveToSection();
 
   const onToggle = () => {
-    setToggle(!toggle);
+    setToggle((prev) => (prev === "" ? "true" : ""));
   };
 
   const handleLogoClick = () => {
@@ -185,7 +185,7 @@ const MenuLayer = styled.div`
 
 const MobileLayer = styled.div`
   width: 100%;
-  display: ${({ toggle }) => (toggle ? "none" : "flex")};
+  display: ${({ toggle }) => (toggle === "true" ? "none" : "flex")};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

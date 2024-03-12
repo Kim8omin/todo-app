@@ -2,67 +2,47 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
-const CardComponent = () => {
-  const list = useSelector((state) => state.addTask.todos);
-
-  console.log(list);
-
+const CardComponent = ({ todo }) => {
+  const navigate = useNavigate();
+  const clickButton = () => {
+    navigate(`/todo/${String(todo?.id)}`, { state: "..." });
+    window.scrollTo(0, 0);
+  };
   return (
-    <CardList>
-      <EachCard>
-        {list?.map((todo) => {
-          return (
-            <div key={todo?.id}>
-              <TaskCard>
-                <StyledLink to={`/todo/${String(todo?.id)}`}>
-                  <div>
-                    <h3>{todo?.title}</h3>
-                  </div>
-                  <div>
-                    <p>{todo?.date}</p>
-                  </div>
-                  <div>
-                    <img
-                      id="img"
-                      src={todo?.file[0]}
-                      alt="imgFile"
-                      style={{ width: "150px", height: "150px" }}
-                    />
-                  </div>
-                  <div>
-                    <p>{todo?.category}</p>
-                  </div>
-                  <div>
-                    <p>{todo?.todo}</p>
-                  </div>
-                  <p>Read More</p>
-                </StyledLink>
-              </TaskCard>
-            </div>
-          );
-        })}
-      </EachCard>
-    </CardList>
+    <div key={todo?.id}>
+      <TaskCard onClick={clickButton}>
+        {/* <StyledLink to={`/todo/${String(todo?.id)}`}> */}
+
+        <div>
+          <h3>{todo?.title}</h3>
+        </div>
+        <div>
+          <p>{todo?.date}</p>
+        </div>
+        <div>
+          <img
+            id="img"
+            src={todo?.file[0]}
+            alt="imgFile"
+            style={{ width: "150px", height: "150px" }}
+          />
+        </div>
+        <div>
+          <p>{todo?.category}</p>
+        </div>
+        <div>
+          <p>{todo?.todo}</p>
+        </div>
+        <p>Read More</p>
+        {/* </StyledLink> */}
+      </TaskCard>
+    </div>
   );
 };
 
 export default CardComponent;
-
-const CardList = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-`;
-
-const EachCard = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: center;
-  align-item: center;
-  gap: 50px;
-`;
 
 export const TaskCard = styled.div`
   display: flex;
