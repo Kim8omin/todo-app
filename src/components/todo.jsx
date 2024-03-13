@@ -88,7 +88,7 @@ const TextLayer = styled.div`
   }
 
   hr {
-    width: 400px;
+    width: 70%;
     border: none;
     border-top: 2px solid #c07848;
     color: #c07848;

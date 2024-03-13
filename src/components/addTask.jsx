@@ -303,7 +303,7 @@ const TitleLayer = styled.div`
   }
 
   hr {
-    width: 300px;
+    width: 70%;
     border: none;
     border-top: 2px solid #c07848;
     color: #c07848;

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const Hr = styled.div`
-  width: 300px;
+  width: 70%;
   border: none;
   border-top: 2px solid #c07848;
   color: #c07848;
