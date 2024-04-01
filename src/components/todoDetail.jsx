@@ -12,7 +12,7 @@ const TodoDetail = () => {
   const list = useSelector((state) => state.addTask.todos);
   console.log(list);
 
-  const selectedItem = list.find((item) => String(item.id) === String(id));
+  const selectedItem = list?.find((item) => String(item.id) === String(id));
 
   if (!selectedItem) {
     return (
@@ -27,7 +27,9 @@ const TodoDetail = () => {
 
   return (
     <DetailLayer>
-      <h2>{selectedItem?.title}</h2>
+      <div className="title">
+        <h2>{selectedItem?.title}</h2>
+      </div>
       <hr />
       <p>{selectedItem?.date}</p>
       <div>
@@ -51,12 +53,17 @@ const DetailLayer = styled.div`
   gap: 10px;
   line-height: 12px;
 
+  title {
+    margin: 0 auto;
+    word-break: break-all;
+  }
+
   h2 {
-    max-width: 40%;
     font-size: 35px;
     font-weight: 300;
     overflow-wrap: break-word;
     line-height: 12px;
+    word-break: break-all;
   }
 
   hr {

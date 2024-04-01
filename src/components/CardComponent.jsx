@@ -1,20 +1,32 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { todoActions } from "../slice/slice";
 
 const CardComponent = ({ todo }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
   const clickButton = () => {
     navigate(`/todo/${String(todo?.id)}`, { state: "..." });
     window.scrollTo(0, 0);
   };
+
+  const clickDelete = (e) => {
+    e.stopPropagation();
+    dispatch(todoActions.delete(todo.id));
+  };
+
+  const clickDone = (e) => {
+    console.log("나클릭2");
+    e.stopPropagation();
+    dispatch(todoActions.status(todo.id));
+  };
   return (
     <div key={todo?.id}>
       <TaskCard onClick={clickButton}>
-        {/* <StyledLink to={`/todo/${String(todo?.id)}`}> */}
-
         <div>
           <h3>{todo?.title}</h3>
         </div>
@@ -35,8 +47,17 @@ const CardComponent = ({ todo }) => {
         <div>
           <p>{todo?.todo}</p>
         </div>
+
+        <p>{todo?.done ? "done" : "in progress"}</p>
+        <div>
+          <button onClick={clickDelete}>delete</button>
+          {todo?.done ? (
+            <button onClick={clickDone}>In progress</button>
+          ) : (
+            <button onClick={clickDone}>Done</button>
+          )}
+        </div>
         <p>Read More</p>
-        {/* </StyledLink> */}
       </TaskCard>
     </div>
   );
@@ -54,7 +75,7 @@ export const TaskCard = styled.div`
   border-radius: 10px;
   padding: 10px;
   width: 250px;
-  height: 400px;
+  min-height: 400px;
 
   h3 {
     overflow: hidden;

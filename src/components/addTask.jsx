@@ -11,7 +11,7 @@ const formFieldArray = [
     placeholder: "Category",
     tag: "select",
     options: [
-      { value: "", title: "카테고리를 선택해주세요" },
+      { value: "", title: "please choose a category" },
       { value: "study", title: "study" },
       { value: "work", title: "work" },
       { value: "diary", title: "diary" },

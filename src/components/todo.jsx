@@ -9,12 +9,14 @@ function Todo() {
   const [emptyList, setEmptyList] = useState(false);
 
   useEffect(() => {
-    if (recentList.length === 0) {
+    if (recentList?.length === 0) {
       setEmptyList(true);
-    } else if (recentList.length >= 1) {
+    } else if (recentList?.length >= 1) {
       setEmptyList(false);
     }
   }, [recentList]);
+
+  console.log(recentList);
 
   return (
     <div id="myTodaySection">

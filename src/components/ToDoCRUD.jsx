@@ -3,13 +3,13 @@ import { useDispatch } from "react-redux";
 import AddTask from "./addTask";
 import Todo from "./todo";
 import ToDoList from "./ToDoList";
-import { addActions } from "../slice/slice";
+import { todoActions } from "../slice/slice";
 
 const ToDoCRUD = ({ testRef2 }) => {
   const dispatch = useDispatch();
 
   const addList = (todo) => {
-    dispatch(addActions.add(todo));
+    dispatch(todoActions.add(todo));
   };
 
   return (

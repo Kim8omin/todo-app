@@ -17,7 +17,7 @@ const ToDoList = () => {
         <CardLayer>
           <h2>To do List</h2>
           <Hr />
-          {recentList.length > 0 ? (
+          {recentList?.length > 0 ? (
             <CardList>
               {recentList?.map((todo) => {
                 return <CardComponent todo={todo} />;
