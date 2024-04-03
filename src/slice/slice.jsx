@@ -19,8 +19,6 @@ const todoSlice = createSlice({
         todo: newTodo.todo,
         done: false,
       });
-
-      // state.todos.reverse();
     },
     delete(state, action) {
       state.todos = state.todos.filter((item) => item.id !== action.payload);

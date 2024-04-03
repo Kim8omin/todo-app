@@ -50,7 +50,7 @@ const CardComponent = ({ todo }) => {
 
         <p>{todo?.done ? "done" : "in progress"}</p>
         <div>
-          <button onClick={clickDelete}>delete</button>
+          <button onClick={clickDelete}>Delete</button>
           {todo?.done ? (
             <button onClick={clickDone}>In progress</button>
           ) : (

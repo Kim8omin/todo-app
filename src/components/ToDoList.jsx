@@ -1,14 +1,18 @@
 import styled from "styled-components";
 import { useSelector } from "react-redux";
 import { ScrollAnimationContainer } from "../util/ScrollAnimationContainer";
-import CardComponent from "./CardComponent";
 import plus from "../assets/plus.png";
 import { Hr } from "../styles/Hr";
 import UseMoveToSection from "../util/UseMoveToSection";
 import { Link } from "react-router-dom";
+import CustomizedSwitches from "../styles/Switch";
 
 const ToDoList = () => {
   const recentList = useSelector((state) => state.addTask.todos);
+  console.log("todoList에서 가져온 부분", recentList);
+  const inProgressList = recentList.filter((item) => item.done === false);
+  console.log(inProgressList);
+
   const { clickHeaderButton } = UseMoveToSection();
 
   return (
@@ -17,11 +21,21 @@ const ToDoList = () => {
         <CardLayer>
           <h2>To do List</h2>
           <Hr />
+          {/* <CustomizedSwitches
+            inProgressList={inProgressList}
+            recentList={recentList}
+          /> */}
           {recentList?.length > 0 ? (
             <CardList>
-              {recentList?.map((todo) => {
-                return <CardComponent todo={todo} />;
-              })}
+              {/* {recentList?.map((todo) => {
+                return ( */}
+              <CustomizedSwitches
+                inProgressList={inProgressList}
+                recentList={recentList}
+              />
+
+              {/* // <CardComponent todo={todo} />; */}
+              {/* })} */}
             </CardList>
           ) : (
             <AddButton>
@@ -82,7 +96,7 @@ const AddButton = styled.div`
   }
 `;
 
-const CardList = styled.div`
+export const CardList = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
