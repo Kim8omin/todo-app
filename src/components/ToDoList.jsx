@@ -9,7 +9,7 @@ import CustomizedSwitches from "../styles/Switch";
 
 const ToDoList = () => {
   const recentList = useSelector((state) => state.addTask.todos);
-  console.log("todoList에서 가져온 부분", recentList);
+  console.log(recentList);
   const inProgressList = recentList.filter((item) => item.done === false);
   console.log(inProgressList);
 

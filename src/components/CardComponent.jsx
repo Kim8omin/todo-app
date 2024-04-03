@@ -57,7 +57,7 @@ const CardComponent = ({ todo }) => {
             <button onClick={clickDone}>Done</button>
           )}
         </div>
-        <p>Read More</p>
+        <p className="read">Read More</p>
       </TaskCard>
     </div>
   );
@@ -96,6 +96,11 @@ export const TaskCard = styled.div`
     max-width: 100px;
     max-height: 100px;
     font-size: 14px;
+  }
+
+  .read {
+    text-decoration: underline;
+    cursor: pointer;
   }
 `;
 

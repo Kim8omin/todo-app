@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 
 const formFieldArray = [
   { type: "text", name: "title", placeholder: "Title", tag: "input" },
-  { type: "date", name: "date", placeholder: "Date", tag: "input" },
+  { type: "text", name: "date", placeholder: "Due date", tag: "input" },
   {
     name: "category",
     placeholder: "Category",
@@ -25,7 +25,7 @@ const AddTask = ({ addList }) => {
   const [todo, setTodo] = useState({
     id: uuidv4(),
     title: "",
-    date: "yyyy-MM-dd",
+    date: "",
     category: "",
     todo: "",
   });
@@ -113,7 +113,7 @@ const AddTask = ({ addList }) => {
     setTodo({
       id: uuidv4(),
       title: "",
-      date: "yyyy-MM-dd",
+      date: "",
       category: "category",
       todo: "",
     });
