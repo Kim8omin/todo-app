@@ -30,6 +30,7 @@ const BannerText = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  font-family: "Dancing Script", cursive;
   font-size: 70px;
   font-weight: bold;
   color: white;
@@ -37,6 +38,6 @@ const BannerText = styled.div`
   text-shadow: rgba(0, 0, 0, 0.5) 1px 1px 2px;
 
   @media screen and (max-width: 768px) {
-    font-size: 40px;
+    font-size: 3.5rem;
   }
 `;
