@@ -6,7 +6,7 @@ const Banner = ({ testRef }) => {
   return (
     <BannerWrapper id="mainSection">
       <img src={ball} alt="ball" ref={testRef} />
-      <BannerText>Just Do it ! </BannerText>
+      <BannerText>Just Dive in ! </BannerText>
     </BannerWrapper>
   );
 };
