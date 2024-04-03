@@ -157,7 +157,7 @@ const HeaderLayer = styled.div`
   justify-content: space-between;
   align-items: center;
   height: 99px;
-  background-color: #c07848;
+  background-color: #212121;
   position: sticky;
   top: 0px;
   z-index: 10;
@@ -187,14 +187,14 @@ const MenuLayer = styled.div`
   gap: 30px;
   margin-right: 80px;
   font-size: 19px;
-  color: #f2e3d9;
+  color: #f9fcf7;
   letter-spacing: 0.5px;
   cursor: pointer;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #f2e3d9;
+  color: #f9fcf7;
 
   &:hover {
     font-weight: bold;
@@ -215,7 +215,7 @@ const MobileLayer = styled.div`
   }
 
   span h2 {
-    color: #f2e3d9;
+    color: #f9fcf7;
     font-size: 1.1rem;
     text-align: center;
   }
@@ -259,6 +259,6 @@ const NavText = styled.h4`
   cursor: pointer;
   color: white;
   &:hover {
-    color: #f1e3d9;
+    color: #f9fcf7;
   }
 `;

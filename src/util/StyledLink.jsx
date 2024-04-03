@@ -18,7 +18,7 @@ export default StyledLinkComponent;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: #f2e3d9;
+  color: #f9fcf7;
 
   &:hover {
     font-weight: bold;

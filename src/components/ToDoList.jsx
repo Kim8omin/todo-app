@@ -63,7 +63,7 @@ const CardLayer = styled.div`
   align-items: center;
   text-align: center;
   flex-direction: column;
-  background-color: #f1e3d9;
+  background-color: #f9fcf7;
   padding: 100px;
   gap: 12px;
 `;

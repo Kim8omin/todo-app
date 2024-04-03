@@ -289,7 +289,7 @@ const TaskWrapper = styled.div`
 margin-top: -5px;
 width: 100%
 max-height: 545px;
-background-color: #F1E3D9;
+background-color: #F9FCF7;
 text-align: center;
 padding: 50px;
 
@@ -305,8 +305,8 @@ const TitleLayer = styled.div`
   hr {
     width: 70%;
     border: none;
-    border-top: 2px solid #c07848;
-    color: #c07848;
+    border-top: 2px solid #212121;
+    color: #212121;
     overflow: visible;
     text-align: center;
     height: 5px;
@@ -332,8 +332,8 @@ const FormLayer = styled.div`
     }
 
     button {
-      background-color: #c07848;
-      border: 1px solid #c07848;
+      background-color: #212121;
+      border: 1px solid #212121;
       color: white;
       width: 85%;
       height: 45px;

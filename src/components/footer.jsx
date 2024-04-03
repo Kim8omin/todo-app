@@ -61,7 +61,7 @@ const MenuLayer = styled.div`
     cursor: pointer;
 
     &: hover {
-      color: #c07848;
+      color: #212121;
     }
   }
   @media (max-width: 768px) {

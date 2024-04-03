@@ -73,7 +73,7 @@ const AntSwitch = muiStyle(Switch)(({ theme }) => ({
       color: "#fff",
       "& + .MuiSwitch-track": {
         opacity: 1,
-        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#C07848",
+        backgroundColor: theme.palette.mode === "dark" ? "#177ddc" : "#212121",
       },
     },
   },
