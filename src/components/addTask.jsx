@@ -75,19 +75,29 @@ const AddTask = ({ addList }) => {
       }
     }
 
-    if (name === "category") {
-      if (value === "category") {
-        setCategoryError("Please select the category");
+    if (name === "date") {
+      var dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
+
+      if (!dateRegex.test(value)) {
+        setToDoError("Date must be a valid 'mm/dd/yyyy' format");
       } else {
-        setCategoryError("");
+        setToDoError("");
+      }
+    }
+
+    if (name === "category") {
+      if (value === "") {
+        setToDoError("Please select the category");
+      } else {
+        setToDoError("");
       }
     }
 
     if (name === "title") {
       if (value.trim().length === 0) {
-        setFillOut("Please fill out every input field.");
+        setToDoError("Please fill out title.");
       } else {
-        setFillOut("");
+        setToDoError("");
       }
     }
   };
@@ -120,56 +130,6 @@ const AddTask = ({ addList }) => {
 
     setFile([]);
   };
-
-  //input이 써지면 에러문구가 없어지는 부분
-  // useEffect(() => {
-  //   if (error.title && todo.title.trim().length >= 3) {
-  //     setError((prevError) => ({
-  //       ...prevError,
-  //       title: "",
-  //     }));
-  //   }
-  // }, [error.title, todo.title]);
-
-  // useEffect(() => {
-  //   if (error.date && todo.date.trim().length >= 1) {
-  //     setError((prevError) => ({
-  //       ...prevError,
-  //       date: "",
-  //     }));
-  //   }
-  // }, [error.date, todo.date]);
-
-  // useEffect(() => {
-  //   if (
-  //     error.category &&
-  //     todo.category.trim().length >= 1 &&
-  //     todo.category !== "category"
-  //   ) {
-  //     setError((prevError) => ({
-  //       ...prevError,
-  //       category: "",
-  //     }));
-  //   }
-  // }, [error.category, todo.category]);
-
-  // useEffect(() => {
-  //   if (error.todo && todo.todo.trim().length >= 1) {
-  //     setError((prevError) => ({
-  //       ...prevError,
-  //       todo: "",
-  //     }));
-  //   }
-  // }, [error.todo, todo.todo]);
-
-  // useEffect(() => {
-  //   if (error.file && file.length >= 1) {
-  //     setError((prevError) => ({
-  //       ...prevError,
-  //       file: "",
-  //     }));
-  //   }
-  // }, [error.file, file]);
 
   return (
     <>

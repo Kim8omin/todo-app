@@ -53,17 +53,15 @@ const DetailLayer = styled.div`
   gap: 10px;
   line-height: 12px;
 
-  title {
-    margin: 0 auto;
-    word-break: break-all;
-  }
-
   h2 {
     font-size: 35px;
     font-weight: 300;
     overflow-wrap: break-word;
-    line-height: 12px;
+    line-height: 40px;
     word-break: break-all;
+    min-height: 50px;
+    margin: 10px;
+    padding: 20px;
   }
 
   hr {
